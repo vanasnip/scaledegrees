@@ -1,0 +1,4 @@
+ul,li.col-xs-4, li.col-xs-12 {
+  list-style-type: none;
+  padding: 2px;
+}
