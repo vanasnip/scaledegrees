@@ -1,4 +1,37 @@
-ul,li.col-xs-4, li.col-xs-12 {
+ul,
+li.select-key {
+
   list-style-type: none;
   padding: 2px;
+}
+
+select.home-keyop, label {
+	font-size: 30px;	
+}
+
+label, select {
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+}
+
+div.home-div
+label,
+select,
+h3 {
+	text-align: center;
+}
+
+button {
+	background-color: pink;
+}
+
+.select-key-label {
+	height: 90px;
+	margin-bottom: 10px;
+}
+
+
+div.select-key-label > h3 {
+	font-size: 70px;
 }
