@@ -160,9 +160,43 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
         return $scope.selectedKey;
      }
 
-     $scope.questions = function(arr){
-      return arr[2];
+     $scope.enquiries = 50;
+     $scope.dispDegree = "";
+     $scope.answer = "";
+     $scope.resp = "";
+
+     var cleanArray = function(arr){
+
+      console.log("entered cleanArray")
+      var newArray = [];
+      var text = "";
+      for(var i = 0; i < arr.length; i++){
+        if(arr[i] != ","){
+          text = text + arr[i];
+        } else {
+          newArray.push(text);
+          text = "";
+        }
+      }
+      newArray.push(text);
+      return newArray;
      }
+     var incri = 0;
+     
+
+     $scope.questions = function(arr){
+        var newArray = cleanArray(arr);
+          $scope.dispDegree = "a";
+          if($scope.resp === $scope.dispDegree){
+            $scope.answer = "correct";            
+            incri++;
+          }else{
+            setTimeout(function(){$scope.answer ="incorrect try again";}, 1000);
+            
+        }
+      }
+
+     
 
 
 });
