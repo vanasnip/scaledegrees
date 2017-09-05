@@ -160,6 +160,10 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
         return $scope.selectedKey;
      }
 
+     $scope.questions = function(arr){
+      return arr[2];
+     }
+
 
 });
 
