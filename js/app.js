@@ -18,37 +18,37 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
     
     $scope.noteNames = ["a","b","c","d","e","f","g"];
     $scope.accidentals = [{sym:"♯", state:false}, {sym:"♭", state:false}]
-    $scope.degrees = {
-      d1: {
+    $scope.degrees = [
+      {
         degree: "I",
         degKey: 0,
       },
-      d2: {
+      {
         degree: "II",
         degKey: 1
       },
-      d3: {
+      {
         degree: "III",
         degKey: 2
       },
-      d4: {
+      {
         degree: "IV",
         degKey: 3
       },
-      d5: {
+      {
         degree: "V",
         degKey: 4
       },
-      d6: {
+      {
         degree: "VI",
         degKey: 5
       },
-      d7: {
+      {
         degree: "VII",
         degKey: 6
       }
       
-    };
+    ];
     $scope.keys = [
       {
         keyName: "C",
@@ -169,33 +169,62 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
 
 
 
-     $scope.cleanArray = function(arr, note){
+     $scope.searchKey = function(key, note){
+      //console.log(key);
       var newArray = [];
       var text = "";
-      for(var i = 0; i < arr.length; i++){
-        if(arr[i] != ","){
-          text = text + arr[i];
-        } else {
-          newArray.push(text);
-          text = "";
+      var myKeyObj = [];
+      
+
+      for (var i = 0; i < $scope.keys.length; i++) {
+        
+        if(key.toLowerCase() === $scope.keys[i].notes[0]){
+          myKeyObj = [$scope.keys[i]];
+          //console.log($scope.keys[i].notes)
+          //console.log(myKeyObj);
+          return $scope.questions(myKeyObj, note);
         }
       }
-      newArray.push(text);
-      return $scope.questions(newArray, note);
+      
+      
      }
      var incri = 0;
+
+     var randomNumber = function(){
+         return Math.floor((Math.random() * 7));
+     } 
+
+     var randomise = function(){
+      var randomDegree = $scope.degrees[randomNumber()];
+      console.log(randomDegree)
+
+      //{degreeLab: II, ans: "d"}
+     }
+
+     var getQNAArray = function(obj){
+
+     }
      
 
-     $scope.questions = function(arr, note){
-          
+     $scope.questions = function(obj, note){
+          var qNA = getQNAArray(obj);
+          /*for (var i = 0; i < qNA.length; i++) {
+            
+          }*/
           if ($scope.acci[0]){
             note = note + $scope.acci[1].sym;
-            console.log($scope.acci[1].sym);
           }
           $scope.dispDegree = "a♯";
           if(note === $scope.dispDegree){
             $scope.answer = "correct";            
             incri++;  
+            /*settimeout(function(){
+              console.log("wait 1");
+              note = undefined;
+              $scope.answer = "";
+
+
+            }, 1000);*/
              
           }else if($scope.note != $scope.dispDegree){
             $scope.answer ="incorrect try again";
