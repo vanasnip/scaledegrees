@@ -160,6 +160,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
      }
 
      $scope.enquiries = 10;
+     $scope.romanNumDeg = "";
      $scope.dispDegree = "";
      $scope.answer = "";
      $scope.acci = [false, ""];
@@ -188,47 +189,66 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
       
       
      }
-     var incri = 0;
+     var incri;
 
      var randomNumber = function(){
-         return Math.floor((Math.random() * 7));
+        var leNumero = Math.floor((Math.random() * 7));
+        while(leNumero === incri){
+          leNumero = Math.floor((Math.random() * 7));
+        }
+        incri = leNumero;
+        return leNumero;
      } 
 
      var randomise = function(){
       var randomDegree = $scope.degrees[randomNumber()];
-      console.log(randomDegree)
+      return randomDegree;
 
       //{degreeLab: II, ans: "d"}
      }
 
      var getQNAArray = function(obj){
+        console.log(obj);
+        var QNAArray = [];
+        var myDeg;
+        for (var i = 0; i < $scope.enquiries; i++) {
+          myDeg = randomise();        
+          QNAArray.push({
+            ques: myDeg.degree,
+            answ: obj[0].notes[myDeg.degKey]      
+          });
+        }
+
+        return QNAArray;
+        //scalePosition:
 
      }
      
 
      $scope.questions = function(obj, note){
-          var qNA = getQNAArray(obj);
-          /*for (var i = 0; i < qNA.length; i++) {
-            
-          }*/
-          if ($scope.acci[0]){
-            note = note + $scope.acci[1].sym;
-          }
-          $scope.dispDegree = "a♯";
-          if(note === $scope.dispDegree){
-            $scope.answer = "correct";            
-            incri++;  
-            /*settimeout(function(){
-              console.log("wait 1");
-              note = undefined;
-              $scope.answer = "";
+          var quesNAns = getQNAArray(obj);
+          for (var i = 0; i < quesNAns.length; i++) {
+            console.log(quesNAns);
+            if ($scope.acci[0]){
+              note = note + $scope.acci[1].sym;
+            }
+            $scope.dispDegree = "a♯";
+            if(note === $scope.dispDegree){
+              $scope.answer = "correct";            
+              incri++;  
+              /*settimeout(function(){
+                console.log("wait 1");
+                note = undefined;
+                $scope.answer = "";
 
 
-            }, 1000);*/
-             
-          }else if($scope.note != $scope.dispDegree){
-            $scope.answer ="incorrect try again";
+              }, 1000);*/
+               
+            }else if($scope.note != $scope.dispDegree){
+              $scope.answer ="incorrect try again";
+            }
           }
+          
         
       }
 });
