@@ -233,8 +233,11 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
      }
 
      $scope.respondings = function(note){
-      console.log(note);
-      console.log($scope.theQuests.answ);
+
+      if ($scope.acci[0]){
+        note = note + $scope.acci[1].sym
+      };
+
       if(note === $scope.theQuests.answ){
         $scope.answer = "correct";
         $scope.searchKey($scope.theKey);
