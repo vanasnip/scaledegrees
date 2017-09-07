@@ -170,7 +170,8 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
 
 
 
-     $scope.searchKey = function(key, note){
+     $scope.searchKey = function(key){
+      $scope.answer = "";
       //console.log(key);
       var newArray = [];
       var text = "";
@@ -183,7 +184,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
           myKeyObj = [$scope.keys[i]];
           //console.log($scope.keys[i].notes)
           //console.log(myKeyObj);
-          return $scope.questions(myKeyObj, note);
+          return $scope.questions(myKeyObj);
         }
       }
       
@@ -207,50 +208,42 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
       //{degreeLab: II, ans: "d"}
      }
 
-     var getQNAArray = function(obj){
-        console.log(obj);
-        var QNAArray = [];
-        var myDeg;
-        for (var i = 0; i < $scope.enquiries; i++) {
-          myDeg = randomise();        
-          QNAArray.push({
+     var getQNAObj = function(obj){ 
+          var myDeg = randomise();        
+          var QNAObj = {
             ques: myDeg.degree,
-            answ: obj[0].notes[myDeg.degKey]      
-          });
+            answ: obj[0].notes[myDeg.degKey]
+          };
+          return QNAObj;
         }
 
-        return QNAArray;
+        
         //scalePosition:
 
-     }
      
+     
+     $scope.theQuests;
+     $scope.resolveMe = false;
 
-     $scope.questions = function(obj, note){
-          var quesNAns = getQNAArray(obj);
-          for (var i = 0; i < quesNAns.length; i++) {
-            console.log(quesNAns);
-            if ($scope.acci[0]){
-              note = note + $scope.acci[1].sym;
-            }
-            $scope.dispDegree = "a♯";
-            if(note === $scope.dispDegree){
-              $scope.answer = "correct";            
-              incri++;  
-              /*settimeout(function(){
-                console.log("wait 1");
-                note = undefined;
-                $scope.answer = "";
+     $scope.questions = function(obj){   
+        console.log('got in');
+        $scope.theQuests =  getQNAObj(obj);
+        console.log($scope.theQuests);        
+        $scope.romanNumDeg = $scope.theQuests.ques;          
+     }
 
-
-              }, 1000);*/
-               
-            }else if($scope.note != $scope.dispDegree){
-              $scope.answer ="incorrect try again";
-            }
-          }
-          
-        
+     $scope.respondings = function(note){
+      console.log(note);
+      console.log($scope.theQuests.answ);
+      if(note === $scope.theQuests.answ){
+        $scope.answer = "correct";
+        $scope.searchKey($scope.theKey);
+      } else if(note != $scope.theQuests.answ){
+        $scope.answer = "not quite, try again";
       }
+     }
+
+      
 });
 
 /*
