@@ -2,5 +2,17 @@
 <h2>Ivan workin it</h2>
 <h2>{{answer}}</h2>
 <h2>{{dispDegree}}</h2>
-<input ng-change="questions(keyArr)" ng-model="resp">
+
+
+<div class="col-xs-8">
+      <ul class="col-xs-12">
+        <li ng-repeat="note in noteNames" ng-click="cleanArray(keyArr, note)" class="col-xs-4 note-btn"><button class="col-xs-12">{{note}}</button></li>
+      </ul>
+    </div>
+<div class="col-xs-4">
+      <ul class="col-xs-12">
+        <li ng-repeat="mod in accidentals" ng-click="accihap(mod)" class="col-xs-12 acci-btn"><button class="col-xs-12">{{mod.sym}}</button></li>
+
+      </ul>
+    </div>
 

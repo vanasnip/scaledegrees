@@ -146,7 +146,6 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
      }
 
       $scope.getKeyArray = function(key){
-        console.log("testing " + key);
         for(var i = 0; i < $scope.keys.length; i++){
           if(key === $scope.keys[i].keyName){
             return $scope.keys[i].notes;
@@ -160,14 +159,17 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
         return $scope.selectedKey;
      }
 
-     $scope.enquiries = 50;
+     $scope.enquiries = 10;
      $scope.dispDegree = "";
      $scope.answer = "";
-     $scope.resp = "";
+     $scope.acci = [false, ""];
+     $scope.accihap = function(mod){
+      $scope.acci = [true, mod];
+     };
 
-     var cleanArray = function(arr){
 
-      console.log("entered cleanArray")
+
+     $scope.cleanArray = function(arr, note){
       var newArray = [];
       var text = "";
       for(var i = 0; i < arr.length; i++){
@@ -179,26 +181,27 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
         }
       }
       newArray.push(text);
-      return newArray;
+      return $scope.questions(newArray, note);
      }
      var incri = 0;
      
 
-     $scope.questions = function(arr){
-        var newArray = cleanArray(arr);
-          $scope.dispDegree = "a";
-          if($scope.resp === $scope.dispDegree){
+     $scope.questions = function(arr, note){
+          
+          if ($scope.acci[0]){
+            note = note + $scope.acci[1].sym;
+            console.log($scope.acci[1].sym);
+          }
+          $scope.dispDegree = "a♯";
+          if(note === $scope.dispDegree){
             $scope.answer = "correct";            
-            incri++;
-          }else{
-            setTimeout(function(){$scope.answer ="incorrect try again";}, 1000);
-            
-        }
+            incri++;  
+             
+          }else if($scope.note != $scope.dispDegree){
+            $scope.answer ="incorrect try again";
+          }
+        
       }
-
-     
-
-
 });
 
 /*
