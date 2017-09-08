@@ -6,7 +6,7 @@ app.config(function($routeProvider){
       templateUrl: "home.html",
       controller: "myCtrl"
     })
-    .when("/keytest/:theKey/:keyArr", {
+    .when("/keytest/:theKey", {
       templateUrl: "keytest.html",
       controller: "myCtrl"
     })
@@ -109,7 +109,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
       },
       {
         keyName: "A♭",
-        notes: ["a♭","b♭","c♯","d♭","e♭","f","g"],
+        notes: ["a♭","b♭","c","d♭","e♭","f","g"],
         index: 10
       },
       {
@@ -137,21 +137,10 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
 
      $scope.keyTest = function(){
       if($scope.selectedKey != "?"){
-        $scope.keyArray = $scope.getKeyArray($scope.selectedKey);
-        $location.path("/keytest/" + $scope.selectedKey +"/"+$scope.keyArray);
-        
-        
-
+        $location.path("/keytest/" + $scope.selectedKey);
       }
      }
 
-      $scope.getKeyArray = function(key){
-        for(var i = 0; i < $scope.keys.length; i++){
-          if(key === $scope.keys[i].keyName){
-            return $scope.keys[i].notes;
-          }          
-        }
-      }
      
 
      $scope.selectKey = function(leKey){
@@ -235,7 +224,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
      $scope.respondings = function(note){
 
       if ($scope.acci[0]){
-        note = note + $scope.acci[1].sym
+        note = note + $scope.acci[1].sym;
       };
 
       if(note === $scope.theQuests.answ){
