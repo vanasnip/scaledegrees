@@ -149,6 +149,8 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      }
 
      $scope.enquiries = 10;
+     $scope.score = 0;
+     $scope.correct = true;
      $scope.romanNumDeg = "";
      $scope.dispDegree = "";
      $scope.answer = "";
@@ -218,9 +220,9 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.resolveMe = false;
 
      $scope.questions = function(obj){   
-        console.log('got in');
+        //console.log('got in');
         $scope.theQuests =  getQNAObj(obj);
-        console.log($scope.theQuests);        
+        //console.log($scope.theQuests);        
         $scope.romanNumDeg = $scope.theQuests.ques;          
      }
 
@@ -231,11 +233,18 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
       };
 
       if(note === $scope.theQuests.answ){
+        $scope.score++;
+        $scope.correct = true;
         $scope.answer = "correct";
+        console.log($scope.score);
         $timeout(function(){$scope.searchKey($scope.theKey);}, 500);
         
 
       } else if(note != $scope.theQuests.answ){
+        if($scope.correct){
+          $scope.score--;
+          $scope.correct = false;
+        }
         $scope.answer = "not quite, try again";
       }
      }
