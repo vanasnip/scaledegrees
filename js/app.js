@@ -14,7 +14,7 @@ app.config(function($routeProvider){
 
 });
 
-app.controller('myCtrl', function($scope, $location, $routeParams) {
+app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
     
     $scope.noteNames = ["a","b","c","d","e","f","g"];
     $scope.accidentals = [{sym:"♯", state:false}, {sym:"♭", state:false}]
@@ -210,7 +210,10 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
         //scalePosition:
 
      
-     
+     var delayMe = function(time){
+   
+      setTimeout(function() {}, time);
+     }
      $scope.theQuests;
      $scope.resolveMe = false;
 
@@ -229,7 +232,9 @@ app.controller('myCtrl', function($scope, $location, $routeParams) {
 
       if(note === $scope.theQuests.answ){
         $scope.answer = "correct";
-        $scope.searchKey($scope.theKey);
+        $timeout(function(){$scope.searchKey($scope.theKey);}, 500);
+        
+
       } else if(note != $scope.theQuests.answ){
         $scope.answer = "not quite, try again";
       }
