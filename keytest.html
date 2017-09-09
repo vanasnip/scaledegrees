@@ -1,8 +1,9 @@
 <div ng-init="searchKey(theKey)"></div>
-
-<h1>{{theKey}}</h1>
-<h2>{{romanNumDeg}}</h2>
-<h2>{{answer}}</h2>
+<div class="limiter">
+<button ng-click="goHome()">back</button>
+<h1>{{theKey}} <span class="roman-deg">{{romanNumDeg}}</span></h1>
+<h2></h2>
+<h2 class="resp-answer">{{answer}}</h2>
 <h2>{{dispDegree}}</h2>
 
 
@@ -16,5 +17,7 @@
         <li ng-repeat="mod in accidentals" ng-click="accihap(mod)" class="col-xs-12 acci-btn"><button class="col-xs-12">{{mod.sym}}</button></li>
 
       </ul>
-    </div>
+</div>
+
+</div>
 

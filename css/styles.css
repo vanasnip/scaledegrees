@@ -1,5 +1,11 @@
+body{
+	margin: 0;
+	text-align: center;
+}
+
 ul,
-li.select-key {
+li.select-key,
+li.note-btn {
 
   list-style-type: none;
   padding: 2px;
@@ -21,6 +27,9 @@ select,
 h3 {
 	text-align: center;
 }
+.resp-answer {
+	height: 45px;
+}
 
 button {
 	background-color: pink;
@@ -34,4 +43,13 @@ button {
 
 div.select-key-label > h3 {
 	font-size: 70px;
+}
+
+span.roman-deg {
+	color: maroon;
+}
+
+div.limiter {
+	max-width: 800px;
+	margin: auto;
 }

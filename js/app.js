@@ -10,6 +10,10 @@ app.config(function($routeProvider){
       templateUrl: "keytest.html",
       controller: "myCtrl"
     })
+    .when("/results/:leScore", {
+      templateUrl: "results.html",
+      controller: "myCtrl"
+    })
     .otherwise ({redirectTo:"/home"});
 
 });
@@ -131,6 +135,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
     ];
      $scope.theKey = $routeParams.theKey;
      $scope.keyArr = $routeParams.keyArr;
+     $scope.leScore = $routeParams.leScore;
      $scope.myKeys = $scope.keys[0];
      $scope.selectedKey = "?";
      $scope.keyArray;
@@ -141,6 +146,16 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
       }
      }
 
+     $scope.goHome = function(){
+      
+        $location.path("/home");
+      
+     }
+
+     $scope.myResults = function(score){
+      $location.path("/results/" + score);
+     }
+
      
 
      $scope.selectKey = function(leKey){
@@ -148,13 +163,16 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
         return $scope.selectedKey;
      }
 
-     $scope.enquiries = 10;
+     $scope.enquiries = 3;
      $scope.score = 0;
-     $scope.correct = true;
+     $scope.correct = [true, 0];
+     $scope.incorrect = 0;
      $scope.romanNumDeg = "";
      $scope.dispDegree = "";
      $scope.answer = "";
      $scope.acci = [false, ""];
+
+
      $scope.accihap = function(mod){
       $scope.acci = [true, mod];
      };
@@ -212,7 +230,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
         //scalePosition:
 
      
-     var delayMe = function(time){
+     var delayMe = function(time){  
    
       setTimeout(function() {}, time);
      }
@@ -230,20 +248,26 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
 
       if ($scope.acci[0]){
         note = note + $scope.acci[1].sym;
+        $scope.acci[0] = false;
       };
 
       if(note === $scope.theQuests.answ){
         $scope.score++;
-        $scope.correct = true;
+        $scope.correct[1]++;
+        $scope.correct[0] = true;
         $scope.answer = "correct";
         console.log($scope.score);
         $timeout(function(){$scope.searchKey($scope.theKey);}, 500);
-        
+
+        if($scope.correct[1] === $scope.enquiries){
+          $scope.myResults($scope.score);
+        }
 
       } else if(note != $scope.theQuests.answ){
-        if($scope.correct){
+        $scope.incorrect++;
+        if($scope.correct[0]){
           $scope.score--;
-          $scope.correct = false;
+          $scope.correct[0] = false;
         }
         $scope.answer = "not quite, try again";
       }
