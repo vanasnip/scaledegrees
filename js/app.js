@@ -6,11 +6,11 @@ app.config(function($routeProvider){
       templateUrl: "home.html",
       controller: "myCtrl"
     })
-    .when("/keytest/:theKey", {
+    .when("/keytest/:theKey/:leStart", {
       templateUrl: "keytest.html",
       controller: "myCtrl"
     })
-    .when("/results/:leScore", {
+    .when("/results/:leScore/:time", {
       templateUrl: "results.html",
       controller: "myCtrl"
     })
@@ -136,24 +136,37 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.theKey = $routeParams.theKey;
      $scope.keyArr = $routeParams.keyArr;
      $scope.leScore = $routeParams.leScore;
+     $scope.leStart = $routeParams.leStart;
      $scope.myKeys = $scope.keys[0];
      $scope.selectedKey = "?";
      $scope.keyArray;
+     var start;
+     var elapsed = '0.0';
+     $scope.time = $routeParams.time;
 
      $scope.keyTest = function(){
       if($scope.selectedKey != "?"){
-        $location.path("/keytest/" + $scope.selectedKey);
+        $scope.leStart = new Date().getTime()
+        $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart);
+        
+        
       }
      }
 
-     $scope.goHome = function(){
-      
-        $location.path("/home");
-      
+     $scope.goHome = function(){      
+        $location.path("/home");      
      }
 
      $scope.myResults = function(score){
-      $location.path("/results/" + score);
+      var time = new Date().getTime() - $scope.leStart;
+      
+      elapsed = Math.floor(time / 100) / 10;
+      if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
+      $scope.time = elapsed;
+      console.log(elapsed);
+      
+      $location.path("/results/" + score + "/" + $scope.time);
+      
      }
 
      
@@ -272,6 +285,13 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
         $scope.answer = "not quite, try again";
       }
      }
+
+     
+  
+    
+
+ 
+
 
       
 });
