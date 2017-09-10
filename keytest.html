@@ -1,5 +1,6 @@
 <div id="sim-body" ng-class="quality" ng-init="searchKey(theKey)">
 	<button class="back-btn" ng-click="goHome()">←</button>
+	
 	<div class="limiter key-test">
 		<div class="reheight-key-test-title"></div>
 		<h1 class="degree-ques">{{theKey}} <span class="roman-deg">{{romanNumDeg}}</span></h1>
@@ -15,7 +16,7 @@
 		    </div>
 		<div class="col-xs-4">
 		      <ul class="col-xs-12 button-box">
-		        <li ng-repeat="mod in accidentals" ng-click="accihap(mod)" class="col-xs-12 acci-btn"><button class="col-xs-12">{{mod.sym}}</button></li>
+		        <li ng-repeat="mod in accidentals" ng-click="accihap(mod)" class="col-xs-12 acci-btn-li"><button class="col-xs-12 acci-btn">{{mod.sym}}</button></li>
 
 		      </ul>
 		</div>

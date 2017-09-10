@@ -6,7 +6,7 @@ app.config(function($routeProvider){
       templateUrl: "home.html",
       controller: "myCtrl"
     })
-    .when("/keytest/:theKey/:leStart", {
+    .when("/keytest/:theKey/:leStart/:quess", {
       templateUrl: "keytest.html",
       controller: "myCtrl"
     })
@@ -137,6 +137,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.keyArr = $routeParams.keyArr;
      $scope.leScore = $routeParams.leScore;
      $scope.leStart = $routeParams.leStart;
+     $scope.quess = $routeParams.quess;
      $scope.myKeys = $scope.keys[0];
      $scope.selectedKey = "?";
      $scope.keyArray;
@@ -147,7 +148,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.keyTest = function(){
       if($scope.selectedKey != "?"){
         $scope.leStart = new Date().getTime()
-        $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart);
+        $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.enquiries);
         
         
       }
@@ -173,10 +174,14 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
 
      $scope.selectKey = function(leKey){
       $scope.selectedKey = leKey.keyName;
+      console.log($scope.enquiries);
         return $scope.selectedKey;
+
      }
 
-     $scope.enquiries = 3;
+     $scope.noQuestion = [10,20,50,100];
+
+     $scope.enquiries = $scope.noQuestion[0];
      $scope.score = 0;
      $scope.correct = [true, 0];
      $scope.incorrect = 0;
@@ -185,6 +190,8 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.answer = "";
      $scope.acci = [false, ""];
 
+
+     
 
 
      $scope.accihap = function(mod){
@@ -274,7 +281,8 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
         $timeout(function(){
           $scope.quality = "normal";
           $scope.searchKey($scope.theKey);
-          if($scope.correct[1] === $scope.enquiries){   
+          console.log($scope.correct[1] == $scope.quess);
+          if($scope.correct[1] == $scope.quess){   
             $scope.myResults($scope.score);
           }
         }, 500);
