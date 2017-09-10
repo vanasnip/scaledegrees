@@ -286,18 +286,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
       }
      }
 
-     
-  
-    
-
- 
-
-
-      
 });
 
-/*
-G, A, B, C, D, E, and F♯
-*/
 
 

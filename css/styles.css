@@ -32,7 +32,14 @@ h3 {
 }
 
 button {
-	background-color: pink;
+	background-color: grey;
+	border: none;
+}
+
+button.select-key-btn:focus {
+	background-color: green;
+	border: none;
+	outline: none;
 }
 
 .select-key-label {
@@ -53,3 +60,9 @@ div.limiter {
 	max-width: 800px;
 	margin: auto;
 }
+
+
+.activated {
+	background-color: pink;
+}
+
