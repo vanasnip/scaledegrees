@@ -186,6 +186,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.acci = [false, ""];
 
 
+
      $scope.accihap = function(mod){
       $scope.acci = [true, mod];
      };
@@ -249,6 +250,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      }
      $scope.theQuests;
      $scope.resolveMe = false;
+     $scope.quality = "normal";
 
      $scope.questions = function(obj){   
         //console.log('got in');
@@ -258,33 +260,38 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      }
 
      $scope.respondings = function(note){
-
       if ($scope.acci[0]){
         note = note + $scope.acci[1].sym;
         $scope.acci[0] = false;
       };
-
       if(note === $scope.theQuests.answ){
         $scope.score++;
         $scope.correct[1]++;
         $scope.correct[0] = true;
         $scope.answer = "correct";
+        $scope.quality = "correct"
         console.log($scope.score);
-        $timeout(function(){$scope.searchKey($scope.theKey);}, 500);
-
-        if($scope.correct[1] === $scope.enquiries){
-          $scope.myResults($scope.score);
-        }
-
+        $timeout(function(){
+          $scope.quality = "normal";
+          $scope.searchKey($scope.theKey);
+          if($scope.correct[1] === $scope.enquiries){   
+            $scope.myResults($scope.score);
+          }
+        }, 500);
+        
       } else if(note != $scope.theQuests.answ){
         $scope.incorrect++;
         if($scope.correct[0]){
           $scope.score--;
           $scope.correct[0] = false;
         }
+        $scope.quality = "wrong"
         $scope.answer = "not quite, try again";
       }
      }
+
+
+
 
 });
 
