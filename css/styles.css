@@ -74,8 +74,10 @@ button:hover {
 
 button.back-btn {
 	width: 50px;
-	font-size: 20px;
+	font-size: 30px;
 	margin: 10px 0 0 10px;
+	border: none;
+	color: #c5cacc;
 }
 
 
@@ -241,6 +243,9 @@ h2.resp-answer,
 h2.annou-score,
 p.annou-time {
 	text-align: center;
+}
+.score-res {
+	color: #04b8bb;
 }
 h2.wrong {
 	color: rgb(193, 21, 38);
