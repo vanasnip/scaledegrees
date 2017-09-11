@@ -136,8 +136,8 @@ button.start-btn {
 @media only screen and (max-width: 768px){
 	.key-test button.col-xs-12.ng-binding {
 		font-size: 22px;
-	    height: 16vw;
-		width: 16vw;
+	    height: 20vw;
+		width: 20vw;
 	}
 }
 @media only screen and (max-width: 380px){
@@ -179,7 +179,8 @@ span.roman-deg {
 }
 
 div.limiter {
-
+	display: flex;
+	flex-wrap: wrap;
 	max-width: 800px;
 	margin: auto;
 }
@@ -243,7 +244,7 @@ ul.button-box {
 }
 
 div#answer-pg {
-	padding-right: 0;
+	margin: auto;
 }
 
 div.results-box {
@@ -317,7 +318,7 @@ div.reheight-key-test-title {
 		width: 100%;
 	}
 	div.reheight-answer-keys {
-		height: 4vh;
+		height: 2vh;
 		width: 100%;
 	}
 }
