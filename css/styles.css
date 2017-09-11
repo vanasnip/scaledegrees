@@ -66,6 +66,7 @@ button {
 }
 button:hover {
 	border-color: #04b8bb;
+	color:#04b8bb;
 }
 
 
@@ -104,6 +105,7 @@ button.start-btn {
 .key-test button.col-xs-12.ng-binding.wrong:focus {
 	border-color: rgb(193, 21, 38);
 
+
 }
 
 .home button.col-xs-12,
@@ -122,9 +124,18 @@ button.start-btn {
 	margin-top: 20px;
 }
 
+.key-test button.col-xs-12.acci-btn.sharp {
+	border-color: #D484FE;
+	color: #D484FE;
+}
+.key-test button.col-xs-12.acci-btn.flat {
+	border-color: #FDBF1F;
+	color: #FDBF1F;
+}
 .key-test button.col-xs-12.acci-btn:focus {
-	border-color: #ffb600;
-	color: #ffb600;
+	border-color: #04b8bb;
+	color: #04b8bb;
+	border-width: 3px;
 }
 
 button.select-key-btn:focus,
@@ -132,6 +143,8 @@ button.start-btn {
 	border-color: #04b8bb;
 	color: #04b8bb;
 }
+
+
 
 @media only screen and (max-width: 768px){
 	.key-test button.col-xs-12.ng-binding {
@@ -181,6 +194,7 @@ span.roman-deg {
 div.limiter {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	max-width: 800px;
 	margin: auto;
 }

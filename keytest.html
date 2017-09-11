@@ -12,7 +12,7 @@
 		<div id="answer-pg" class="col-xs-11">
 		      <ul class="col-xs-12 button-box">
 		        <li ng-repeat="note in noteNames" ng-click="respondings(note)" class="col-xs-4 note-btn"><button class="col-xs-12" ng-class="quality">{{note}}</button></li>
-		        <li ng-repeat="mod in accidentals" ng-click="accihap(mod)" class="col-xs-4 acci-btn-li"><button class="col-xs-12 acci-btn">{{mod.sym}}</button></li>
+		        <li ng-repeat="mod in accidentals" ng-click="accihap(mod)" class="col-xs-4 acci-btn-li"><button class="col-xs-12 acci-btn" ng-class="mod.name">{{mod.sym}}</button></li>
 		      </ul>
 		    </div>
 

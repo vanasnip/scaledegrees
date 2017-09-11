@@ -21,7 +21,7 @@ app.config(function($routeProvider){
 app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
     
     $scope.noteNames = ["a","b","c","d","e","f","g"];
-    $scope.accidentals = [{sym:"♯", state:false}, {sym:"♭", state:false}]
+    $scope.accidentals = [{sym:"♯", state:false, name:"sharp"}, {sym:"♭", state:false, name:"flat"}]
     $scope.degrees = [
       {
         degree: "I",
@@ -179,7 +179,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
 
      }
 
-     $scope.noQuestion = [10,20,50,100];
+     $scope.noQuestion = [3,20,50,100];
 
      $scope.enquiries = $scope.noQuestion[0];
      $scope.score = 0;
