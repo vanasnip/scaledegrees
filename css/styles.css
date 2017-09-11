@@ -22,6 +22,9 @@ li.acci-btn-li {
 select.home-keyop, label {
 	font-size: 30px;	
 }
+select {
+	-webkit-appearance: none;
+}
 
 label, select {
 	margin-left: auto;
@@ -146,7 +149,16 @@ button.start-btn {
 	color: #04b8bb;
 }
 
+button.settings-btn {
+	margin: auto;
+	border: none;
 
+}
+
+img.settings-img {
+	width: 50px;
+	height:50px;
+}
 
 @media only screen and (max-width: 768px){
 	.key-test button.col-xs-12.ng-binding {
@@ -201,6 +213,14 @@ div.limiter {
 	margin: auto;
 }
 
+div.question-main {
+	display: flex;
+	flex-wrap: wrap;
+}
+div.question-settings {
+	display: flex;
+	flex-wrap: wrap;
+}
 div#sim-body {
 	margin: 20px auto auto auto;
 	height: calc(100vh - 40px);
@@ -253,6 +273,10 @@ h2.wrong {
 
 h2.correct{
 	color: #04b8bb;
+}
+div.setting-box {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 ul.button-box {
@@ -320,6 +344,10 @@ div.reheight-answer-keys {
 }
 div.reheight-select-key-title{
 	height: 4vh;
+	width: 100%;
+}
+div.reheight-select-key-title-2{
+	height: 26vh;
 	width: 100%;
 }
 div.reheight-key-test-title {

@@ -1,11 +1,18 @@
-
+<button ng-show="settingStat" ng-click="settingStat = !settingStat" class="back-btn">←</button>
+	
 	<div class="limiter">
 		<div class="col-xs-12 home-div">
-		<div class="reheight-select-key-title"></div>
-		<p ng-hide="true" class="no-ques col-xs-12">number of questions</p>
-		<select ng-hide="true" class="no-ques-sel col-xs-4" ng-model="enquiries" ng-options="num for num in noQuestion">
-		<option value="num"></option>
-</select>
+
+		<div class="reheight-select-key-title"></div>		
+		<div ng-show="settingStat" class="col-xs-12 question-settings">		
+		<div class="reheight-select-key-title-2"></div>	
+			<h3 class="no-ques col-xs-12">number of questions</h3>
+			<select class="no-ques-sel col-xs-4" ng-model="enquiries" ng-options="num for num in noQuestion">			
+				<option value="num"></option>
+			</select>
+		</div>
+
+		<div ng-hide="settingStat" class="col-xs-12 question-main">
 			<label class="col-xs-12">Select A Key</label>
 			<div class="reheight-selectKey"></div>
 		   	<div class="col-xs-12 select-key-label">
@@ -24,5 +31,11 @@
 				</li>
 				
 			</ul>
+			<div class="setting-box col-xs-12">
+				<button ng-click="settingStat = !settingStat" class="settings-btn"><img src="images/settings.png" alt="" class="settings-img"></button>
+			</div>
+
+			
+		</div>
 		</div>
 	</div>

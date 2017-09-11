@@ -179,7 +179,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
 
      }
 
-     $scope.noQuestion = [3,20,50,100];
+     $scope.noQuestion = [10,20,50,100];
 
      $scope.enquiries = $scope.noQuestion[0];
      $scope.score = 0;
@@ -189,6 +189,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.dispDegree = "";
      $scope.answer = "";
      $scope.acci = [false, ""];
+     $scope.settingStat = false;
 
 
      
