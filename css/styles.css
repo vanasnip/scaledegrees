@@ -62,20 +62,14 @@ button {
 	background-color: black;
 	border: #B3B6B7 1px solid;
 	outline: none;
-	color: #B3B6B7;
+	color: white;
 }
 button:hover {
 	border-color: #04b8bb;
 }
 
-button.select-key-btn:focus {
-	border-color: #04b8bb;
-}
 
-button.start-btn {
-	border-color: #04b8bb;
-	color: #04b8bb;
-}
+
 
 button.back-btn {
 	width: 50px;
@@ -84,7 +78,7 @@ button.back-btn {
 }
 
 
-
+button.start-btn,
 .key-test button.col-xs-12.ng-binding {
     border-radius: 50%;
     max-height: 83px;
@@ -94,6 +88,13 @@ button.back-btn {
     margin: auto;
     font-size: 28px;
     color: #c5cacc;
+}
+
+button.start-btn {
+    margin: 15px 0 0 25px;	
+    font-size: 15px;
+    min-height: 75px;
+    min-width: 75px;
 }
 .key-test button.col-xs-12.ng-binding.correct:focus {
 	border-color: #04b8bb;
@@ -105,14 +106,20 @@ button.back-btn {
 
 }
 
-.home button.col-xs-12 {
+.home button.col-xs-12,
+button.start-btn {
     border-radius: 50%;
     max-height: 90px;
     max-width: 90px;
     height: 10vw;
     width: 10vw;
     margin: auto;
+    font-size: 20px;	
     
+}
+
+button.start-btn {
+	margin-top: 20px;
 }
 
 .key-test button.col-xs-12.acci-btn:focus {
@@ -120,10 +127,15 @@ button.back-btn {
 	color: #ffb600;
 }
 
+button.select-key-btn:focus,
+button.start-btn {
+	border-color: #04b8bb;
+	color: #04b8bb;
+}
 
 @media only screen and (max-width: 768px){
 	.key-test button.col-xs-12.ng-binding {
-		font-size: 15px;
+		font-size: 22px;
 	    height: 16vw;
 		width: 16vw;
 	}
@@ -141,7 +153,19 @@ button.back-btn {
 
 
 div.select-key-label > h3 {
+	width: 54%;
 	font-size: 70px;
+	text-align: right;
+}
+@media only screen and (max-width: 630px){
+	div.select-key-label > h3 {
+		width: 57%;
+	}
+}
+@media only screen and (max-width: 430px){
+	div.select-key-label > h3 {
+		width: 60%;
+	}
 }
 
 h1.degree-ques {
@@ -178,10 +202,10 @@ div#sim-body.correct {
 div#sim-body.wrong {
 	box-shadow: 0 0 0 0 rgba(193, 21, 38, 0.8);
   cursor: pointer;
-  -webkit-animation: pulse 1.25s infinite cubic-bezier(0.46, 0, 0, 1);
-  -moz-animation: pulse 1.25s infinite cubic-bezier(0.46, 0, 0, 1);
-  -ms-animation: pulse 1.25s infinite cubic-bezier(0.46, 0, 0, 1);
-  animation: pulse 1.25s infinite cubic-bezier(0.46, 0, 0, 1);
+  -webkit-animation: pulse 0.75s infinite cubic-bezier(0.46, 0, 0, 1);
+  -moz-animation: pulse 0.75s infinite cubic-bezier(0.46, 0, 0, 1);
+  -ms-animation: pulse 0.75s infinite cubic-bezier(0.46, 0, 0, 1);
+  animation: pulse 0.75s infinite cubic-bezier(0.46, 0, 0, 1);
 }
 
 @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(193, 21, 38, 0);}}
@@ -215,6 +239,7 @@ ul.button-box {
 	padding: 0;
 	    display: flex;
     flex-wrap: wrap;
+    margin: auto;
 }
 
 div#answer-pg {
@@ -239,10 +264,10 @@ div.results-box {
 	.home button.col-xs-12 {
 	    max-height: 90px;
 	    max-width: 90px;
-	    height: 13vw;
-	    width: 13vw;
+	    height: 15vw;
+	    width: 15vw;
 	    margin: auto;   
-	    font-size: 12px; 
+	    font-size: 19px; 
 	}
 }
 
@@ -255,7 +280,7 @@ li.col-xs-4,
 }
 
 div.reheight-selectKey{
-	height: 7vh;
+	height: 3vh;
 	width: 100%;
 }
 
@@ -278,7 +303,7 @@ div.reheight-select-key-title{
 	width: 100%;
 }
 div.reheight-key-test-title {
-	height: 7vh;
+	height: 3vh;
 	width: 100%;
 }
 
@@ -292,7 +317,7 @@ div.reheight-key-test-title {
 		width: 100%;
 	}
 	div.reheight-answer-keys {
-		height: 13vh;
+		height: 4vh;
 		width: 100%;
 	}
 }

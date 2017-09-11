@@ -285,7 +285,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
           if($scope.correct[1] == $scope.quess){   
             $scope.myResults($scope.score);
           }
-        }, 500);
+        }, 300);
         
       } else if(note != $scope.theQuests.answ){
         $scope.incorrect++;
