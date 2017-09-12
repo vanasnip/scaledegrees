@@ -10,7 +10,7 @@ app.config(function($routeProvider){
       templateUrl: "keytest.html",
       controller: "myCtrl"
     })
-    .when("/results/:leScore/:time", {
+    .when("/results/:leScore/:time/:totalQuess", {
       templateUrl: "results.html",
       controller: "myCtrl"
     })
@@ -21,35 +21,42 @@ app.config(function($routeProvider){
 app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
     
     $scope.noteNames = ["a","b","c","d","e","f","g"];
-    $scope.accidentals = [{sym:"♯", state:false, name:"sharp"}, {sym:"♭", state:false, name:"flat"}]
+    $scope.accidentals = [{sym:"♭", state:false, name:"flat"}, {sym:"♯", state:false, name:"sharp"}]
     $scope.degrees = [
       {
         degree: "I",
         degKey: 0,
+        alphaN: "1"
       },
       {
         degree: "II",
-        degKey: 1
+        degKey: 1,
+        alphaN: "2"
       },
       {
         degree: "III",
-        degKey: 2
+        degKey: 2,
+        alphaN: "3"
       },
       {
         degree: "IV",
-        degKey: 3
+        degKey: 3,
+        alphaN: "4"
       },
       {
         degree: "V",
-        degKey: 4
+        degKey: 4,
+        alphaN: "5"
       },
       {
         degree: "VI",
-        degKey: 5
+        degKey: 5,
+        alphaN: "6"
       },
       {
         degree: "VII",
-        degKey: 6
+        degKey: 6,
+        alphaN: "7"
       }
       
     ];
@@ -138,6 +145,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.leScore = $routeParams.leScore;
      $scope.leStart = $routeParams.leStart;
      $scope.quess = $routeParams.quess;
+     $scope.totalQuess = $routeParams.totalQuess;
      $scope.myKeys = $scope.keys[0];
      $scope.selectedKey = "?";
      $scope.keyArray;
@@ -166,7 +174,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
       $scope.time = elapsed;
       console.log(elapsed);
       
-      $location.path("/results/" + score + "/" + $scope.time);
+      $location.path("/results/" + score + "/" + $scope.time + "/" + $scope.quess);
       
      }
 
@@ -242,7 +250,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      var getQNAObj = function(obj){ 
           var myDeg = randomise();        
           var QNAObj = {
-            ques: myDeg.degree,
+            ques: myDeg.alphaN,
             answ: obj[0].notes[myDeg.degKey]
           };
           return QNAObj;
