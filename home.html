@@ -3,14 +3,25 @@
 	<div class="limiter">
 		<div class="col-xs-12 home-div">
 
-		<div class="reheight-select-key-title"></div>		
-		<div ng-show="settingStat" class="col-xs-12 question-settings">		
+		<div class="reheight-select-key-title"></div>	
+
+
+		<div ng-show="settingStat" class="col-xs-12 question-settings">
+		<h2 class="col-xs-12">Settings</h2>
+		<form name="form">
+		  <h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-value="true"> Alpha Numeric: <span class="setting-dat alpha">5</span></h3>
+		  <h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-value="false"> Roman Numeral: <span class="setting-dat roman">V</span></h3>
+		</form>
+		
 		<div class="reheight-select-key-title-2"></div>	
 			<h3 class="no-ques col-xs-12">number of questions</h3>
 			<select class="no-ques-sel col-xs-4" ng-model="enquiries" ng-options="num for num in noQuestion">			
 				<option value="num"></option>
 			</select>
 		</div>
+
+
+
 
 		<div ng-hide="settingStat" class="col-xs-12 question-main">
 			<label class="col-xs-12">Select A Key</label>

@@ -6,7 +6,7 @@ app.config(function($routeProvider){
       templateUrl: "home.html",
       controller: "myCtrl"
     })
-    .when("/keytest/:theKey/:leStart/:quess", {
+    .when("/keytest/:theKey/:leStart/:quess/:degStyle", {
       templateUrl: "keytest.html",
       controller: "myCtrl"
     })
@@ -146,6 +146,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.leStart = $routeParams.leStart;
      $scope.quess = $routeParams.quess;
      $scope.totalQuess = $routeParams.totalQuess;
+     $scope.degStyle = $routeParams.degStyle;
      $scope.myKeys = $scope.keys[0];
      $scope.selectedKey = "?";
      $scope.keyArray;
@@ -156,7 +157,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.keyTest = function(){
       if($scope.selectedKey != "?"){
         $scope.leStart = new Date().getTime()
-        $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.enquiries);
+        $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.enquiries + "/" + $scope.romaOrAlpha);
         
         
       }
@@ -187,7 +188,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
 
      }
 
-     $scope.noQuestion = [10,20,50,100];
+     $scope.noQuestion = [5,10,20,50,100];
 
      $scope.enquiries = $scope.noQuestion[0];
      $scope.score = 0;
@@ -198,7 +199,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.answer = "";
      $scope.acci = [false, ""];
      $scope.settingStat = false;
-
+     $scope.romaOrAlpha = true;
 
      
 
@@ -248,9 +249,20 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      }
 
      var getQNAObj = function(obj){ 
+        var quessFunc = function(){
+          
+              if($scope.degStyle === "true"){
+                
+                return myDeg.alphaN;
+              } else if($scope.degStyle === "false") {
+                
+                return myDeg.degree;
+              }
+              
+            };
           var myDeg = randomise();        
           var QNAObj = {
-            ques: myDeg.alphaN,
+            ques: quessFunc(),
             answ: obj[0].notes[myDeg.degKey]
           };
           return QNAObj;
@@ -268,6 +280,8 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      $scope.resolveMe = false;
      $scope.quality = "normal";
 
+     $scope.gotItRight = true;
+
      $scope.questions = function(obj){   
         //console.log('got in');
         $scope.theQuests =  getQNAObj(obj);
@@ -276,17 +290,25 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      }
 
      $scope.respondings = function(note){
+      
       if ($scope.acci[0]){
         note = note + $scope.acci[1].sym;
         $scope.acci[0] = false;
       };
       if(note === $scope.theQuests.answ){
-        $scope.score++;
         $scope.correct[1]++;
+        console.log($scope.gotItRight);
+        if($scope.gotItRight == true){
+          
+          
+          $scope.score++;
+          
+        };
+        $scope.gotItRight = true;
         $scope.correct[0] = true;
         $scope.answer = "correct";
         $scope.quality = "correct"
-        console.log($scope.score);
+      
         $timeout(function(){
           $scope.quality = "normal";
           $scope.searchKey($scope.theKey);
@@ -297,11 +319,15 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
         }, 300);
         
       } else if(note != $scope.theQuests.answ){
+        $scope.gotItRight = false;
+
         $scope.incorrect++;
         if($scope.correct[0]){
-          $scope.score--;
+
+          $scope.gotItRight = false;
           $scope.correct[0] = false;
         }
+        
         $scope.quality = "wrong"
         $scope.answer = "not quite, try again";
       }
