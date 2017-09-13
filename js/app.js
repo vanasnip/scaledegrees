@@ -253,10 +253,10 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
           
               if($scope.degStyle === "true"){
                 
-                return myDeg.alphaN;
+                return myDeg.degree;
               } else if($scope.degStyle === "false") {
                 
-                return myDeg.degree;
+                return myDeg.alphaN;
               }
               
             };
@@ -290,7 +290,7 @@ app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
      }
 
      $scope.respondings = function(note){
-      
+
       if ($scope.acci[0]){
         note = note + $scope.acci[1].sym;
         $scope.acci[0] = false;
