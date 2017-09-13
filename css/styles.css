@@ -153,16 +153,18 @@ button.start-btn {
 	border-color: #D484FE;
 	color: #D484FE;
 }
+
 .key-test button.col-xs-12.acci-btn.flat {
 	border-color: #FDBF1F;
 	color: #FDBF1F;
 }
 .key-test button.col-xs-12.acci-btn:focus {
-	border-color: #04b8bb;
-	color: #04b8bb;
+
 	border-width: 3px;
 }
-
+button.acci-btn:focus {
+	border-width: 3px;
+}
 button.select-key-btn:focus,
 button.start-btn {
 	border-color: #04b8bb;
@@ -172,7 +174,6 @@ button.start-btn {
 button.settings-btn {
 	margin: auto;
 	border: none;
-
 }
 
 img.settings-img {
@@ -409,5 +410,10 @@ div.reheight-key-test-title {
 		height: 2vh;
 		width: 100%;
 	}
+	button.acci-btn:focus,
+    button.acci-btn:hover {
+    	border-width: 3px;
+    }
 }
+
 
