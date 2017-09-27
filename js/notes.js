@@ -5,6 +5,8 @@ var session = {
 	
 };
 
+
+
 /*
 var loadHistory = 
 for each session start 
