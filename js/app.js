@@ -19,11 +19,39 @@
       .otherwise ({redirectTo:"/home"});
 
   });
+  var allSessionData = [];
+  console.log(allSessionData.length);
+  function addToAllSessionData(item){
+    allSessionData.push(item);
+  }
+  function cleanSessionData(data){
+    for(var i = 0; i < data.length; i++){
+      addToAllSessionData(data[i]);
+    }
+  };
+  //get latest session
+  function getLatestSession(data){
+    console.log(data);
+    return data[data.length - 1];
+  }
+  function sessionsOfAKey(session){
+
+  }
   
-
-
   app.controller('resultsCtrl', function($scope){
-    console.log(idbApp.getSessions());
+    
+    var promisedData = idbApp.getSessions().then(function(sessionData){
+
+    if(allSessionData.length === 0){
+      cleanSessionData(sessionData);
+    } else {
+      addToAllSessionData(getLatestSession(sessionData));
+    }
+    
+    });
+    
+    console.log(allSessionData);
+    
   }) 
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
@@ -193,7 +221,7 @@
       $scope.myResults = function(score, session){
         
         $scope.time = cleanTime(getFinalTime());
-        console.log($scope.time);
+       // console.log($scope.time);
         
         $location.path("/results/" + score + "/" + $scope.time + "/" + $scope.quess);
         idbApp.addSession(session);
@@ -205,7 +233,7 @@
       $scope.selectKey = function(leKey){
         $scope.selectedKey = leKey.keyName;
         //idbApp.addSession();//******************************************************************************************** */
-        console.log($scope.enquiries);
+       // console.log($scope.enquiries);
           return $scope.selectedKey;
 
       }
@@ -332,7 +360,7 @@
             degree: $scope.theQuests,
             correct: $scope.gotItRight
           };
-          console.log(sessionObject);
+          //console.log(sessionObject);
           mySession.allResponses.push(sessionObject);
           $scope.gotItRight = true;
           $scope.correct[0] = true;
@@ -342,11 +370,12 @@
           $timeout(function(){
             $scope.quality = "normal";
             $scope.searchKey($scope.theKey);
-            console.log($scope.correct[1] == $scope.quess);
+            //console.log($scope.correct[1] == $scope.quess);
             if($scope.correct[1] == $scope.quess){
               mySession.session = $scope.leStart;
+              mySession.key = $scope.theKey;
               mySession.id = getNewTime();
-              console.log(mySession);
+              //console.log(mySession);
               
               $scope.myResults($scope.score, mySession);
             }

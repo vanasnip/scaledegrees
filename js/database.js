@@ -56,6 +56,7 @@ var idbApp = (function() {
         var item = {
             session: obj.session,
             id: obj.id,
+            key: obj.key,
             answers: obj.allResponses
         };
    
