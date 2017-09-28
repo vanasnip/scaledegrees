@@ -70,9 +70,17 @@ var idbApp = (function() {
       });
   }
 
+  function getSessions() {
+    return dbPromise.then(function(db){
+      var tx = db.transaction('sessions');
+      var sessionsOS = tx.objectStore('sessions');
+      return sessionsOS.getAll();
+    });
+  }
 
   return {
     dbPromise: (dbPromise),
-    addSession: (addSession)
+    addSession: (addSession),
+    getSessions: (getSessions)
   };
 })();

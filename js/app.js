@@ -19,8 +19,12 @@
       .otherwise ({redirectTo:"/home"});
 
   });
-
   
+
+
+  app.controller('resultsCtrl', function($scope){
+    console.log(idbApp.getSessions());
+  }) 
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
       
@@ -186,12 +190,13 @@
         if(Math.round(elapsed) == elapsed) { elapsed += '.0'; };
         return elapsed;
       }
-      $scope.myResults = function(score){
+      $scope.myResults = function(score, session){
         
         $scope.time = cleanTime(getFinalTime());
         console.log($scope.time);
         
         $location.path("/results/" + score + "/" + $scope.time + "/" + $scope.quess);
+        idbApp.addSession(session);
         
       }
 
@@ -205,7 +210,7 @@
 
       }
 
-      $scope.noQuestion = [20,10,50,100];
+      $scope.noQuestion = [2,10,50,100];
 
       $scope.enquiries = $scope.noQuestion[0];
       $scope.score = 0;
@@ -342,8 +347,8 @@
               mySession.session = $scope.leStart;
               mySession.id = getNewTime();
               console.log(mySession);
-              idbApp.addSession(mySession);
-              $scope.myResults($scope.score);
+              
+              $scope.myResults($scope.score, mySession);
             }
           }, 250);
           
