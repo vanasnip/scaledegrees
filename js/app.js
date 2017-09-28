@@ -20,7 +20,7 @@
 
   });
   var allSessionData = [];
-  console.log(allSessionData.length);
+  //console.log(allSessionData.length);
   function addToAllSessionData(item){
     allSessionData.push(item);
   }
@@ -37,22 +37,32 @@
   function sessionsOfAKey(session){
 
   }
+  function cleanResultTime(rawTime){
+    var elapsed = Math.floor(rawTime / 100) / 10;
+    if(Math.round(elapsed) == elapsed) { elapsed += '.0'; };
+    return elapsed;
+  }
+
+  function getAvarage(session){
+    
+  }
+ 
   
   app.controller('resultsCtrl', function($scope){
-    
+    $scope.latestAvarage;
+    var latestSession;
     var promisedData = idbApp.getSessions().then(function(sessionData){
-
+    
     if(allSessionData.length === 0){
       cleanSessionData(sessionData);
     } else {
       addToAllSessionData(getLatestSession(sessionData));
     }
-    
-    });
-    
-    console.log(allSessionData);
-    
-  }) 
+    latestSession = getLatestSession(allSessionData);
+    console.log(latestSession);
+        
+    });   
+  });
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
       
@@ -204,20 +214,7 @@
       $scope.goHome = function(){      
           $location.path("/home");      
       }
-      function getNewTime(){
-        var newTime = new Date().getTime();
-        return newTime;
-      }
-      function getFinalTime(){
-        var finalTime = getNewTime() - $scope.leStart;        
-        return finalTime;
-      }
-
-      function cleanTime(rawTime){
-        elapsed = Math.floor(rawTime / 100) / 10;
-        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; };
-        return elapsed;
-      }
+  
       $scope.myResults = function(score, session){
         
         $scope.time = cleanTime(getFinalTime());
@@ -298,6 +295,21 @@
         //{degreeLab: II, ans: "d"}
       }
 
+      function getNewTime(){
+        var newTime = new Date().getTime();
+        return newTime;
+      }
+      function getFinalTime(){
+        var finalTime = getNewTime() - $scope.leStart;        
+        return finalTime;
+      }
+    
+      function cleanTime(rawTime){
+        elapsed = Math.floor(rawTime / 100) / 10;
+        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; };
+        return elapsed;
+      }
+
       var getQNAObj = function(obj){ 
           var quessFunc = function(){
             
@@ -348,7 +360,7 @@
         };
         if(note === $scope.theQuests.answ){
           $scope.correct[1]++;
-          console.log($scope.gotItRight);
+          //console.log($scope.gotItRight);
           if($scope.gotItRight == true){        
             $scope.score++;
            
