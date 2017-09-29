@@ -30,9 +30,11 @@
     }
   };
   //get latest session
-  function getLatestSession(data){
-    console.log(data);
-    return data[data.length - 1];
+  function getLatestSession(all){
+    console.log(all);
+    var last = all;
+    console.log(last);
+    return last;
   }
   function sessionsOfAKey(session){
 
@@ -43,25 +45,42 @@
     return elapsed;
   }
 
+
+
   function getAvarage(session){
-    
+    console.log(session);
+    var start = cleanResultTime(Number(session.session));
+    var fin = cleanResultTime(session.id);
+    console.log(start + " " + fin);
+    var avarage = (fin - start)/ session.answers.length;
+
+    return avarage;
+
+ 
+
   }
  
   
   app.controller('resultsCtrl', function($scope){
-    $scope.latestAvarage;
+    $scope.latestSessioAvarage;
     var latestSession;
     var promisedData = idbApp.getSessions().then(function(sessionData){
-    
-    if(allSessionData.length === 0){
-      cleanSessionData(sessionData);
-    } else {
-      addToAllSessionData(getLatestSession(sessionData));
-    }
-    latestSession = getLatestSession(allSessionData);
-    console.log(latestSession);
-        
+     return new Promise(resolve => {
+      resolve(sessionData);
+     });
     });   
+
+    async function fetchSessionData() {
+      var x = await promisedData;
+      allSessionData = cleanSessionData(x);
+      latestSession = getLatestSession(allSessionData);
+      console.log(latestSession);
+      //$scope.latestSessioAvarage = getAvarage(latestSession);
+    }
+    fetchSessionData();
+    
+    console.log(getLatestSession(allSessionData));
+
   });
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {

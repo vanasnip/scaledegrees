@@ -76,7 +76,11 @@ var idbApp = (function() {
       var tx = db.transaction('sessions');
       var sessionsOS = tx.objectStore('sessions');
       return sessionsOS.getAll();
-    });
+    }).then(function(data){
+      return data;
+    }).catch(function(e){
+      console.log('Error adding items: ', e);
+    })
   }
 
   return {
