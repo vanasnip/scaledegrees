@@ -25,14 +25,16 @@
     allSessionData.push(item);
   }
   function cleanSessionData(data){
+
     for(var i = 0; i < data.length; i++){
       addToAllSessionData(data[i]);
     }
   };
   //get latest session
   function getLatestSession(all){
-    console.log(all);
-    var last = all;
+    var lastKey = all.length - 1;
+    console.log(lastKey);
+    var last = all[11];
     console.log(last);
     return last;
   }
@@ -54,9 +56,7 @@
     console.log(start + " " + fin);
     var avarage = (fin - start)/ session.answers.length;
 
-    return avarage;
-
- 
+    return avarage; 
 
   }
  
@@ -64,22 +64,35 @@
   app.controller('resultsCtrl', function($scope){
     $scope.latestSessioAvarage;
     var latestSession;
-    var promisedData = idbApp.getSessions().then(function(sessionData){
-     return new Promise(resolve => {
-      resolve(sessionData);
-     });
-    });   
-
-    async function fetchSessionData() {
-      var x = await promisedData;
-      allSessionData = cleanSessionData(x);
-      latestSession = getLatestSession(allSessionData);
-      console.log(latestSession);
-      //$scope.latestSessioAvarage = getAvarage(latestSession);
-    }
-    fetchSessionData();
+   
     
-    console.log(getLatestSession(allSessionData));
+      var response = new Promise(function(resolve, reject){
+        async function fetchData(){
+          idbApp.getSessions()
+          .then(function(sessionData){
+            console.log(resolve(sessionData));
+            resolve(sessionData);
+            return sessionData;
+          }).catch(function(e){
+            reject('no no drama');
+            console.log(e);
+          });
+        }
+        fetchData();
+      })
+
+      response.then(function(sessionData){
+        console.log(sessionData);
+        return sessionData;
+      }, function(err){
+        console.log(err);
+      })
+    
+    console.log(response);
+      
+
+
+
 
   });
 

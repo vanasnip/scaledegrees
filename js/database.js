@@ -70,18 +70,22 @@ var idbApp = (function() {
         console.log('Error adding items: ', e);
       });
   }
+  
+  
+ 
 
   function getSessions() {
     return dbPromise.then(function(db){
       var tx = db.transaction('sessions');
       var sessionsOS = tx.objectStore('sessions');
       return sessionsOS.getAll();
-    }).then(function(data){
+    }).then(function(data){      
       return data;
     }).catch(function(e){
       console.log('Error adding items: ', e);
     })
   }
+
 
   return {
     dbPromise: (dbPromise),
