@@ -8,8 +8,8 @@
 	
 			<canvas id="chart-result" height="400" width="400"></canvas>
 			<h2 class="annou-score col-xs-12">You scored <span class="score-res">{{leScore}}</span> out of <span class="score-res">{{totalQuess}}</span></h2>
-			<h3 class="annou-time">time : <span class="score-res">{{time}} </span>sec</h3>
-			<h3 class="annou-time"> time per : <span class="score-res">{{time / leScore}}</span> sec</h3>
+			<h3 class="annou-time col-xs-12">time : <span class="score-res">{{time}} </span>sec</h3>
+			<h3 class="annou-time col-xs-12"> time per : <span class="score-res">{{(time / leScore).toFixed(2)}}</span> sec</h3>
 
 		</div>
 	</div>
