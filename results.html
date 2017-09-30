@@ -5,9 +5,9 @@
 <button class="back-btn" ng-click="goHome()">←</button>
 	<div class="limiter">	
 		
-		<div class="reheight-results"></div>
-		<div id="results-box">
-			<h2 class="annou-score">You scored <span class="score-res">{{leScore}}</span> out of <span class="score-res">{{totalQuess}}</span></h2>
+	
+			<canvas id="chart-result" height="400" width="400"></canvas>
+			<h2 class="annou-score col-xs-12">You scored <span class="score-res">{{leScore}}</span> out of <span class="score-res">{{totalQuess}}</span></h2>
 			<h3 class="annou-time">time : <span class="score-res">{{time}} </span>sec</h3>
 			<h3 class="annou-time"> time per : <span class="score-res">{{time / leScore}}</span> sec</h3>
 

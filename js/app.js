@@ -31,14 +31,7 @@
       return data;
     }
   };
-  //get latest session
-  function getLatestSession(all){
-    var lastKey = all.length - 1;
-    //console.log(lastKey);
-    var last = all[11];
-    console.log(last.key);
-    return last;
-  }
+
   function sessionsOfAKey(session){
 
   }
@@ -63,7 +56,8 @@
  
   
   app.controller('resultsCtrl', function($scope){
-       
+    const CHART = document.getElementById("chart-result");
+       console.log(CHART);
        var requestData = new Promise(async function(resolve, reject) { 
         var allData = await idbApp.getSessions();    
           if(allData.length > 0) {   
@@ -77,7 +71,8 @@
           //   var element = '<h1>"' + data[i].key + '" </h1>';
           //   $('#lalala').append(element);            
           // };
-          console.log(getChartArray(data));
+            var chartData = getChartArray(data);
+            populateChart(chartData, CHART);
 
            return data;
          }).catch(function(error){
@@ -94,6 +89,15 @@
          var lastSession = getLatestSession(asyncData);
          //{session: "1506758731436", id: 1506758735481, key: "C", answers: Array(2)}
          filterAllSessions(asyncData);
+           //get latest session
+          function getLatestSession(all){
+            console.log(all);
+            var lastKey = all.length - 1;
+            //console.log(lastKey);
+            var last = all[lastKey];
+            console.log(last.key);
+            return last;
+          }
          
          // filter all session of that key
          function filterSession(session){
@@ -129,8 +133,46 @@
          return finalArray
 
         }
+         function populateChart(data, theChart){
+           console.log(data);
+         let chartObject = new Chart(theChart,{
+              type: 'bar',
+              data: {
+                  labels: data,
+                  datasets: [{
+                      label: 'Avg Time (sec)',
+                      data: data,
+                      borderColor: "#04b8bb",
+                      fill: false,
+                      borderWidth: 2
+                  }]
+                  
+                
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }],
+                      xAxes: [{
+                        display: false
+                    }]
+                  }
+              }
+          });
+
+        };
+
+   
+        
 
         
+      
+      
+
+
 
  
 
@@ -307,7 +349,7 @@
 
       }
 
-      $scope.noQuestion = [2,10,50,100];
+      $scope.noQuestion = [20,10,50,100];
 
       $scope.enquiries = $scope.noQuestion[0];
       $scope.score = 0;
