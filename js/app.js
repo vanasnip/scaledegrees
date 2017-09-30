@@ -28,14 +28,15 @@
 
     for(var i = 0; i < data.length; i++){
       addToAllSessionData(data[i]);
+      return data;
     }
   };
   //get latest session
   function getLatestSession(all){
     var lastKey = all.length - 1;
-    console.log(lastKey);
+    //console.log(lastKey);
     var last = all[11];
-    console.log(last);
+    console.log(last.key);
     return last;
   }
   function sessionsOfAKey(session){
@@ -50,49 +51,88 @@
 
 
   function getAvarage(session){
-    console.log(session);
+    //console.log(session);
     var start = cleanResultTime(Number(session.session));
     var fin = cleanResultTime(session.id);
-    console.log(start + " " + fin);
-    var avarage = (fin - start)/ session.answers.length;
+    //console.log(start + " " + fin);
+    var avarage = ((fin - start)/ session.answers.length).toFixed(2);
 
-    return avarage; 
+    return parseFloat(avarage); 
 
   }
  
   
   app.controller('resultsCtrl', function($scope){
-    $scope.latestSessioAvarage;
-    var latestSession;
-   
-    
-      var response = new Promise(function(resolve, reject){
-        async function fetchData(){
-          idbApp.getSessions()
-          .then(function(sessionData){
-            console.log(resolve(sessionData));
-            resolve(sessionData);
-            return sessionData;
-          }).catch(function(e){
-            reject('no no drama');
-            console.log(e);
-          });
+       
+       var requestData = new Promise(async function(resolve, reject) { 
+        var allData = await idbApp.getSessions();    
+          if(allData.length > 0) {   
+             resolve(allData); 
+          } else {
+             reject('data was not fetched');
+          }           
+        }).then(function(data){
+          console.log(data); 
+          // for(var i = 0; i < data.length; i++){
+          //   var element = '<h1>"' + data[i].key + '" </h1>';
+          //   $('#lalala').append(element);            
+          // };
+          console.log(getChartArray(data));
+
+           return data;
+         }).catch(function(error){
+           console.log(error);
+         });
+
+         function getChartArray(asyncData){
+
+          
+         //process data
+         var finalArray = [];
+         
+         // which key to result 
+         var lastSession = getLatestSession(asyncData);
+         //{session: "1506758731436", id: 1506758735481, key: "C", answers: Array(2)}
+         filterAllSessions(asyncData);
+         
+         // filter all session of that key
+         function filterSession(session){
+           
+          
+           if(session.key == lastSession.key){
+            return true;
+           }else{
+             return false;
+           }
+         }
+
+         function filterAllSessions(data){
+           var session = data;
+           
+           for(var i = 0; i < asyncData.length; i++){
+            //console.log(session[i].id);
+             if(filterSession(session[i])){
+              addToFinalArray(session[i]);
+             }
+           }
+         }
+
+
+         // add to array of average respose for session of that key
+         function addToFinalArray(session){
+           //console.log(session);
+          //get avarage time for a session
+          var sessionAverage = getAvarage(session);
+          finalArray.push(sessionAverage);
+         }
+         
+         return finalArray
+
         }
-        fetchData();
-      })
 
-      response.then(function(sessionData){
-        console.log(sessionData);
-        return sessionData;
-      }, function(err){
-        console.log(err);
-      })
-    
-    console.log(response);
-      
+        
 
-
-
+ 
 
   });
 

@@ -78,12 +78,16 @@ var idbApp = (function() {
     return dbPromise.then(function(db){
       var tx = db.transaction('sessions');
       var sessionsOS = tx.objectStore('sessions');
-      return sessionsOS.getAll();
-    }).then(function(data){      
-      return data;
+      return sessionsOS;
+    }).then(function(sOS){
+      var getData = sOS.getAll();
+      return getData;      
+    }).then(function(data){  
+      return  data;
     }).catch(function(e){
       console.log('Error adding items: ', e);
     })
+    
   }
 
 
