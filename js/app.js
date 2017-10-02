@@ -53,10 +53,28 @@
     return parseFloat(avarage); 
 
   }
+
+  function drawCanvas(height,width){
+    var loc =  document.getElementById('chart-div');
+    var canvas = document.createElement("canvas");
+    canvas.setAttribute("id", "chart-result");
+    canvas.height=height;
+    canvas.width = width;
+    var context = canvas.getContext('2d');
+    loc.appendChild(canvas);
+    return context;
+  }
+  function removeCanvas(id){
+    var oldcanv = document.getElementById(id);
+    document.removeChild(oldcanv);
+  }
  
   
   app.controller('resultsCtrl', function($scope){
-    const CHART = document.getElementById("chart-result");
+    $scope.clearCanvas = function(canvasID){
+      removeCanvas(canvasID);
+    }
+    var CHART;
        console.log(CHART);
        var requestData = new Promise(async function(resolve, reject) { 
         var allData = await idbApp.getSessions();    
@@ -71,6 +89,8 @@
           //   var element = '<h1>"' + data[i].key + '" </h1>';
           //   $('#lalala').append(element);            
           // };
+            drawCanvas(400,400);
+            CHART = document.getElementById("chart-result");
             var chartData = getChartArray(data);
             populateChart(chartData, CHART);
 
@@ -349,7 +369,7 @@
 
       }
 
-      $scope.noQuestion = [20,10,50,100];
+      $scope.noQuestion = [2,10,50,100];
 
       $scope.enquiries = $scope.noQuestion[0];
       $scope.score = 0;
