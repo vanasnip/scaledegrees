@@ -64,15 +64,17 @@
     loc.appendChild(canvas);
     return context;
   }
-  function removeCanvas(id){
-    var oldcanv = document.getElementById(id);
-    document.removeChild(oldcanv);
+  function removeCanvas(divID, chartID){
+    var div = document.getElementById(divID);
+    var chart = document.getElementById(chartID);
+    div.removeChild(chart);
   }
  
   
   app.controller('resultsCtrl', function($scope){
-    $scope.clearCanvas = function(canvasID){
-      removeCanvas(canvasID);
+    $scope.clearCanvas = function(divID, canvasID){
+      removeCanvas(divID, canvasID);
+      console.log('canvas removed');
     }
     var CHART;
        console.log(CHART);

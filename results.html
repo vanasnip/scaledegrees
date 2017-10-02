@@ -2,10 +2,8 @@
 
 <div id="sim-body" ng-controller="resultsCtrl" >
 <div class="results">
-<button class="back-btn" ng-click="removeCanvas('chart-result'); goHome()">←</button>
+<button class="back-btn" ng-click="clearCanvas('chart-div', 'chart-result'); goHome()">←</button>
 	<div class="limiter">	
-		
-	
 			<div id="chart-div" class="col-xs-12"></div>
 			<h2 class="annou-score col-xs-12">You scored <span class="score-res">{{leScore}}</span> out of <span class="score-res">{{totalQuess}}</span></h2>
 			<h3 class="annou-time col-xs-12">time : <span class="score-res">{{time}} </span>sec</h3>
