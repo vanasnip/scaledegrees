@@ -67,6 +67,7 @@
     loc.appendChild(canvas);
     return context;
   }
+  async function stallData(){return await idbApp.getSessions()};
 
   
   app.controller('resultsCtrl', function($scope, $route){
@@ -75,8 +76,20 @@
    }
     var CHART;
 
-       var requestData = new Promise(async function(resolve, reject) { 
-        var allData = await idbApp.getSessions();    
+       new Promise(async function(resolve, reject) { 
+        
+
+      
+        
+        var allData = await stallData();
+        window.addEventListener('unhandledrejection', event => {
+          location.reload();
+          // Prevent error output on the console:
+          console.log('Reason: ' + event.reason);
+          event.preventDefault();
+          
+        }); 
+        console.log(allData);  
           if(allData.length > 0) {   
              resolve(allData); 
           } else {
