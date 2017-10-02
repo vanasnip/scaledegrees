@@ -63,17 +63,15 @@
     canvas.height=height;
     canvas.width = width;
     var context = canvas.getContext('2d');
-    //console.log(context);
+    console.log(context);
     loc.appendChild(canvas);
     return context;
   }
 
-  //https://ui-router.github.io/ng1/docs/0.3.1/index.html#/api/ui.router.state.directive:ui-view
   
   app.controller('resultsCtrl', function($scope, $route){
-    $route.reloadRoute = function() {
+    $scope.reloadRoute = function() {
       $route.reload();
-      console.log('reload!')
    }
     var CHART;
 
@@ -110,11 +108,11 @@
          filterAllSessions(asyncData);
            //get latest session
           function getLatestSession(all){
-            //console.log(all);
+            console.log(all);
             var lastKey = all.length - 1;
             //console.log(lastKey);
             var last = all[lastKey];
-            //console.log(last.key);
+            console.log(last.key);
             return last;
           }
          
@@ -153,7 +151,7 @@
 
         }
          function populateChart(data, theChart){
-           //console.log(data);
+           console.log(data);
          let chartObject = new Chart(theChart,{
               type: 'bar',
               data: {
