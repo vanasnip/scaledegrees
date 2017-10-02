@@ -416,4 +416,6 @@ div.reheight-key-test-title {
     }
 }
 
-
+canvas#chart-result {
+	display: inline-block;
+}

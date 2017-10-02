@@ -55,29 +55,28 @@
   }
 
   function drawCanvas(height,width){
+    
+    
     var loc =  document.getElementById('chart-div');
     var canvas = document.createElement("canvas");
     canvas.setAttribute("id", "chart-result");
     canvas.height=height;
     canvas.width = width;
     var context = canvas.getContext('2d');
+    //console.log(context);
     loc.appendChild(canvas);
     return context;
   }
-  function removeCanvas(divID, chartID){
-    var div = document.getElementById(divID);
-    var chart = document.getElementById(chartID);
-    div.removeChild(chart);
-  }
- 
+
+  //https://ui-router.github.io/ng1/docs/0.3.1/index.html#/api/ui.router.state.directive:ui-view
   
-  app.controller('resultsCtrl', function($scope){
-    $scope.clearCanvas = function(divID, canvasID){
-      removeCanvas(divID, canvasID);
-      console.log('canvas removed');
-    }
+  app.controller('resultsCtrl', function($scope, $route){
+    $route.reloadRoute = function() {
+      $route.reload();
+      console.log('reload!')
+   }
     var CHART;
-       console.log(CHART);
+
        var requestData = new Promise(async function(resolve, reject) { 
         var allData = await idbApp.getSessions();    
           if(allData.length > 0) {   
@@ -86,15 +85,13 @@
              reject('data was not fetched');
           }           
         }).then(function(data){
-          console.log(data); 
-          // for(var i = 0; i < data.length; i++){
-          //   var element = '<h1>"' + data[i].key + '" </h1>';
-          //   $('#lalala').append(element);            
-          // };
+          //console.log(data); 
+         
             drawCanvas(400,400);
             CHART = document.getElementById("chart-result");
             var chartData = getChartArray(data);
-            populateChart(chartData, CHART);
+            var myFancyChart = populateChart(chartData, CHART);
+            myFancyChart.render();
 
            return data;
          }).catch(function(error){
@@ -113,11 +110,11 @@
          filterAllSessions(asyncData);
            //get latest session
           function getLatestSession(all){
-            console.log(all);
+            //console.log(all);
             var lastKey = all.length - 1;
             //console.log(lastKey);
             var last = all[lastKey];
-            console.log(last.key);
+            //console.log(last.key);
             return last;
           }
          
@@ -156,7 +153,7 @@
 
         }
          function populateChart(data, theChart){
-           console.log(data);
+           //console.log(data);
          let chartObject = new Chart(theChart,{
               type: 'bar',
               data: {
@@ -184,19 +181,8 @@
                   }
               }
           });
-
+          return chartObject;
         };
-
-   
-        
-
-        
-      
-      
-
-
-
- 
 
   });
 
