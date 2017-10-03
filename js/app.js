@@ -16,6 +16,10 @@
         templateUrl: "results.html",
         controller: "myCtrl"
       })
+      .when("/allresults", {
+        templateUrl: "all_results.html",
+        controller: "myCtrl"
+      })
       .otherwise ({redirectTo:"/home"});
 
   });
@@ -69,18 +73,102 @@
   }
   async function stallData(){return await idbApp.getSessions()};
 
+  function getChartArray(asyncData){
+    
+              
+             //process data
+             var finalArray = [];
+             
+             // which key to result 
+             var lastSession = getLatestSession(asyncData);
+             //{session: "1506758731436", id: 1506758735481, key: "C", answers: Array(2)}
+             filterAllSessions(asyncData);
+               //get latest session
+              function getLatestSession(all){
+                console.log(all);
+                var lastKey = all.length - 1;
+                //console.log(lastKey);
+                var last = all[lastKey];
+                console.log(last.key);
+                return last;
+              }
+             
+             // filter all session of that key
+             function filterSession(session){
+               
+              
+               if(session.key == lastSession.key){
+                return true;
+               }else{
+                 return false;
+               }
+             }
+    
+             function filterAllSessions(data){
+               var session = data;
+               
+               for(var i = 0; i < asyncData.length; i++){
+                //console.log(session[i].id);
+                 if(filterSession(session[i])){
+                  addToFinalArray(session[i]);
+                 }
+               }
+             }
+    
+    
+             // add to array of average respose for session of that key
+             function addToFinalArray(session){
+               //console.log(session);
+              //get avarage time for a session
+              var sessionAverage = getAvarage(session);
+              finalArray.push(sessionAverage);
+             }
+             
+             return finalArray
+    
+            }
+             function populateChart(data, theChart){
+               console.log(data);
+             let chartObject = new Chart(theChart,{
+                  type: 'bar',
+                  data: {
+                      labels: data,
+                      datasets: [{
+                          label: 'Avg Time (sec)',
+                          data: data,
+                          borderColor: "#04b8bb",
+                          fill: false,
+                          borderWidth: 2
+                      }]
+                      
+                    
+                  },
+                  options: {
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero:true
+                              }
+                          }],
+                          xAxes: [{
+                            display: false
+                        }]
+                      }
+                  }
+              });
+              return chartObject;
+            };
+
+  app.controller('allResultsCtrl', function($scope, $route){
+
+  });
   
   app.controller('resultsCtrl', function($scope, $route){
-    $scope.reloadRoute = function() {
-      $route.reload();
-   }
-    var CHART;
+
+      var CHART;
 
        new Promise(async function(resolve, reject) { 
-        
 
-      
-        
         var allData = await stallData();
         window.addEventListener('unhandledrejection', event => {
           location.reload();
@@ -109,91 +197,7 @@
            console.log(error);
          });
 
-         function getChartArray(asyncData){
-
-          
-         //process data
-         var finalArray = [];
-         
-         // which key to result 
-         var lastSession = getLatestSession(asyncData);
-         //{session: "1506758731436", id: 1506758735481, key: "C", answers: Array(2)}
-         filterAllSessions(asyncData);
-           //get latest session
-          function getLatestSession(all){
-            console.log(all);
-            var lastKey = all.length - 1;
-            //console.log(lastKey);
-            var last = all[lastKey];
-            console.log(last.key);
-            return last;
-          }
-         
-         // filter all session of that key
-         function filterSession(session){
-           
-          
-           if(session.key == lastSession.key){
-            return true;
-           }else{
-             return false;
-           }
-         }
-
-         function filterAllSessions(data){
-           var session = data;
-           
-           for(var i = 0; i < asyncData.length; i++){
-            //console.log(session[i].id);
-             if(filterSession(session[i])){
-              addToFinalArray(session[i]);
-             }
-           }
-         }
-
-
-         // add to array of average respose for session of that key
-         function addToFinalArray(session){
-           //console.log(session);
-          //get avarage time for a session
-          var sessionAverage = getAvarage(session);
-          finalArray.push(sessionAverage);
-         }
-         
-         return finalArray
-
-        }
-         function populateChart(data, theChart){
-           console.log(data);
-         let chartObject = new Chart(theChart,{
-              type: 'bar',
-              data: {
-                  labels: data,
-                  datasets: [{
-                      label: 'Avg Time (sec)',
-                      data: data,
-                      borderColor: "#04b8bb",
-                      fill: false,
-                      borderWidth: 2
-                  }]
-                  
-                
-              },
-              options: {
-                  scales: {
-                      yAxes: [{
-                          ticks: {
-                              beginAtZero:true
-                          }
-                      }],
-                      xAxes: [{
-                        display: false
-                    }]
-                  }
-              }
-          });
-          return chartObject;
-        };
+       
 
   });
 
@@ -347,15 +351,16 @@
       $scope.goHome = function(){      
           $location.path("/home");      
       }
+      $scope.allResults = function(){      
+        $location.path("/allresults");      
+      }
   
       $scope.myResults = function(score, session){
         
         $scope.time = cleanTime(getFinalTime());
        // console.log($scope.time);
-        
         $location.path("/results/" + score + "/" + $scope.time + "/" + $scope.quess);
-        idbApp.addSession(session);
-        
+        idbApp.addSession(session);        
       }
 
       

@@ -24,9 +24,7 @@ li.acci-btn-li {
 select.home-keyop, label {
 	font-size: 30px;	
 }
-select {
-	
-}
+
 
 label, select {
 	margin-left: auto;
@@ -52,6 +50,10 @@ h3 {
 	margin: 4px 10px 0 0;
 	width: 40px;
 	height: 40px;
+}
+
+div.home-div label {
+	color: #d6d6d6;
 }
 
 div.home-div.col-xs-12 {
@@ -171,14 +173,31 @@ button.start-btn {
 	color: #04b8bb;
 }
 
+button.all-results-btn,
 button.settings-btn {
 	margin: auto;
 	border: none;
 }
 
+img.all-results-img,
 img.settings-img {
 	width: 50px;
 	height:50px;
+}
+
+li.all-results-li {
+	text-align: right;
+}
+
+ul.home-header,
+li.header-title {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+ul.home-header {
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
 
 @media only screen and (max-width: 768px){
@@ -192,11 +211,13 @@ img.settings-img {
 	button.start-btn {
 		font-size: 10px;
 		font-weight: 900;
+		margin-top: 0;
 	}
 }
 .select-key-label {
 	height: 90px;
 	margin-bottom: 10px;
+	
 }
 
 
@@ -204,6 +225,7 @@ div.select-key-label > h3 {
 	width: 54%;
 	font-size: 70px;
 	text-align: right;
+	margin-top: 0;
 }
 @media only screen and (max-width: 630px){
 	div.select-key-label > h3 {

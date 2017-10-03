@@ -25,7 +25,12 @@
 
 
 		<div ng-hide="settingStat" class="col-xs-12 question-main">
-			<label class="col-xs-12">Select A Key</label>
+			<ul class="col-xs-12 home-header">
+				<li class="col-xs-3 setting-li"><button ng-click="settingStat = !settingStat" class="settings-btn"><img src="images/settings.png" alt="" class="settings-img"></button></li>
+				<li class="col-xs-6 header-title"><label class="col-xs-12">Select A Key</label></li>
+				<li class="col-xs-3 all-results-li"><button ng-click="allResults()" class="all-results-btn"><img src="images/scores.png" alt="" class="all-results-img"></button></li>
+			</ul>
+			
 			<div class="reheight-selectKey"></div>
 		   	<div class="col-xs-12 select-key-label">
 		   		<h3 class="col-xs-6">{{selectedKey}} </h3>
@@ -43,9 +48,7 @@
 				</li>
 				
 			</ul>
-			<div class="setting-box col-xs-12">
-				<button ng-click="settingStat = !settingStat" class="settings-btn"><img src="images/settings.png" alt="" class="settings-img"></button>
-			</div>
+		
 
 			
 		</div>
