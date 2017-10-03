@@ -419,3 +419,52 @@ div.reheight-key-test-title {
 canvas#chart-result {
 	display: inline-block;
 }
+
+@keyframes slideInFromBottom {
+	0% {
+		opacity: 0;
+	  transform: translateY(200%);
+	}
+	100% {
+	opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+  @keyframes slideInFromRight {
+	0% {
+		opacity: 0;
+	  transform: translateX(200%);
+	}
+	100% {
+	opacity: 1;
+	  transform: translateX(0);
+	}
+  }
+
+@keyframes flip-y {
+0% {
+	opacity: 0;
+	transform: rotateY(180deg);
+}
+100% {
+	opacity: 1;
+	transform: rotateY(360deg);
+
+}
+}
+
+canvas#chart-result {
+-webkit-animation-delay: 0.3s; /* Safari 4.0 - 8.0 */
+	animation-delay: 0.3s;
+animation: 0.7s ease-out 0s 1 slideInFromBottom;
+}
+
+div.result-info {
+	-webkit-animation-delay: 0.5s; /* Safari 4.0 - 8.0 */
+	animation-delay: 0.5s;
+	animation: 1.3s ease-in 0s 1 slideInFromRight;
+	}
+
+body {
+    overflow:hidden;
+}
