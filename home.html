@@ -2,55 +2,43 @@
 	
 	<div class="limiter">
 		<div class="col-xs-12 home-div">
+			<div class="reheight-select-key-title"></div>	
+			<div ng-show="settingStat" class="col-xs-12 question-settings">
+			<h2 class="col-xs-12">Settings</h2>
 
-		<div class="reheight-select-key-title"></div>	
-
-
-		<div ng-show="settingStat" class="col-xs-12 question-settings">
-		<h2 class="col-xs-12">Settings</h2>
-		<form name="form">
-		  <h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-value="true"> Roman Numeral: <span class="setting-dat roman">V</span></h3>
-		  <h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-value="false"> Alpha Numeric: <span class="setting-dat alpha">5</span></h3>
-		  
-		</form>
-		
-		<div class="reheight-select-key-title-2"></div>	
-			<h3 class="no-ques col-xs-12">number of questions</h3>
-			<select class="no-ques-sel col-xs-4" ng-model="enquiries" ng-options="num for num in noQuestion">			
+			<form name="form">
+				<h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-value="true"> Roman Numeral: <span class="setting-dat roman">V</span></h3>
+				<h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-value="false"> Alpha Numeric: <span class="setting-dat alpha">5</span></h3>
+			</form>
+			
+			<div class="reheight-select-key-title-2"></div>	
+				<h3 class="no-ques col-xs-12">number of questions</h3>
+				<select class="no-ques-sel col-xs-4" ng-model="enquiries" ng-options="num for num in noQuestion">			
 				<option value="num"></option>
-			</select>
-		</div>
+				</select>
+			</div>
 
 
 
 
-		<div ng-hide="settingStat" class="col-xs-12 question-main">
-			<ul class="col-xs-12 home-header">
-				<li class="col-xs-3 setting-li"><button ng-click="settingStat = !settingStat" class="settings-btn"><img src="images/settings.png" alt="" class="settings-img"></button></li>
-				<li class="col-xs-6 header-title"><label class="col-xs-12">Select A Key</label></li>
-				<li class="col-xs-3 all-results-li"><button ng-click="allResults()" class="all-results-btn"><img src="images/scores.png" alt="" class="all-results-img"></button></li>
-			</ul>
-			
-			<div class="reheight-selectKey"></div>
-		   	<div class="col-xs-12 select-key-label">
-		   		<h3 class="col-xs-6">{{selectedKey}} </h3>
-		   			<button ng-init="global.myAction = false" ng-show="global.myAction" class="col-xs-3 start-btn pulse-btn" ng-click="keyTest()">start</button>
-		   
-
-					
-
-
-		   	</div>
-			<div class="reheight-button-box-home"></div>
-			<ul class="col-xs-12 button-box home">
-				<li class="col-xs-3 select-key" ng-model="myKeys" ng-repeat="key in keys">
-					<button class="col-xs-12 select-key-btn" ng-click="global.myAction = true; selectKey(key)">{{key.keyName}}</button>
-				</li>
+			<div ng-hide="settingStat" class="col-xs-12 question-main">
+				<ul class="col-xs-12 home-header">
+					<li class="col-xs-3 setting-li"><button ng-click="settingStat = !settingStat" class="settings-btn"><img src="images/settings.png" alt="" class="settings-img"></button></li>
+					<li class="col-xs-6 header-title"><label class="col-xs-12">Select A Key</label></li>
+					<li class="col-xs-3 all-results-li"><button ng-click="allResults()" class="all-results-btn"><img src="images/scores.png" alt="" class="all-results-img"></button></li>
+				</ul>
 				
-			</ul>
-		
-
-			
-		</div>
+				<div class="reheight-selectKey"></div>
+				<div class="col-xs-12 select-key-label">
+					<h3 class="col-xs-6">{{selectedKey}} </h3>
+					<button ng-init="global.myAction = false" ng-show="global.myAction" class="col-xs-3 start-btn pulse-btn" ng-click="keyTest()">start</button>
+				</div>
+				<div class="reheight-button-box-home"></div>
+				<ul class="col-xs-12 button-box home">
+					<li class="col-xs-3 select-key" ng-model="myKeys" ng-repeat="key in keys">
+						<button class="col-xs-12 select-key-btn" ng-click="global.myAction = true; selectKey(key)">{{key.keyName}}</button>
+					</li>				
+				</ul>			
+			</div>
 		</div>
 	</div>
