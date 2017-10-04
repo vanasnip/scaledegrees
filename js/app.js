@@ -23,173 +23,21 @@
       .otherwise ({redirectTo:"/home"});
 
   });
-  var allSessionData = [];
-  //console.log(allSessionData.length);
-  function addToAllSessionData(item){
-    allSessionData.push(item);
-  }
-  function cleanSessionData(data){
-
-    for(var i = 0; i < data.length; i++){
-      addToAllSessionData(data[i]);
-      return data;
-    }
-  };
-
-  function sessionsOfAKey(session){
-
-  }
-  function cleanResultTime(rawTime){
-    var elapsed = Math.floor(rawTime / 100) / 10;
-    if(Math.round(elapsed) == elapsed) { elapsed += '.0'; };
-    return elapsed;
-  }
-
-
-
-  function getAvarage(session){
-    //console.log(session);
-    var start = cleanResultTime(Number(session.session));
-    var fin = cleanResultTime(session.id);
-    //console.log(start + " " + fin);
-    var avarage = ((fin - start)/ session.answers.length).toFixed(2);
-
-    return parseFloat(avarage); 
-
-  }
-
-  function drawCanvas(height,width){
-    
-    
-    var loc =  document.getElementById('chart-div');
-    var canvas = document.createElement("canvas");
-    canvas.setAttribute("id", "chart-result");
-    canvas.height=height;
-    canvas.width = width;
-    var context = canvas.getContext('2d');
-    console.log(context);
-    loc.appendChild(canvas);
-    return context;
-  }
-  async function stallData(){return await idbApp.getSessions()};
-
-  function getChartArray(asyncData){
-    
-              
-             //process data
-             var finalArray = [];
-             
-             // which key to result 
-             var lastSession = getLatestSession(asyncData);
-             //{session: "1506758731436", id: 1506758735481, key: "C", answers: Array(2)}
-             filterAllSessions(asyncData);
-               //get latest session
-              function getLatestSession(all){
-                console.log(all);
-                var lastKey = all.length - 1;
-                //console.log(lastKey);
-                var last = all[lastKey];
-                console.log(last.key);
-                return last;
-              }
-             
-             // filter all session of that key
-             function filterSession(session){
-               
-              
-               if(session.key == lastSession.key){
-                return true;
-               }else{
-                 return false;
-               }
-             }
-    
-             function filterAllSessions(data){
-               var session = data;
-               
-               for(var i = 0; i < asyncData.length; i++){
-                //console.log(session[i].id);
-                 if(filterSession(session[i])){
-                  addToFinalArray(session[i]);
-                 }
-               }
-             }
-    
-    
-             // add to array of average respose for session of that key
-             function addToFinalArray(session){
-               //console.log(session);
-              //get avarage time for a session
-              var sessionAverage = getAvarage(session);
-              finalArray.push(sessionAverage);
-             }
-             
-             return finalArray
-    
-            }
-             function populateChart(data, theChart){
-               console.log(data);
-             let chartObject = new Chart(theChart,{
-                  type: 'bar',
-                  data: {
-                      labels: data,
-                      datasets: [{
-                          label: 'Avg Time (sec)',
-                          data: data,
-                          borderColor: "#04b8bb",
-                          fill: false,
-                          borderWidth: 2
-                      }]
-                      
-                    
-                  },
-                  options: {
-                      scales: {
-                          yAxes: [{
-                              ticks: {
-                                  beginAtZero:true
-                              }
-                          }],
-                          xAxes: [{
-                            display: false
-                        }]
-                      }
-                  }
-              });
-              return chartObject;
-            };
 
   app.controller('allResultsCtrl', function($scope, $route){
 
   });
   
-  app.controller('resultsCtrl', function($scope, $route){
+  app.controller('sessionResultsCtrl', function($scope, $route){
 
-      var CHART;
-
-       new Promise(async function(resolve, reject) { 
-
-        var allData = await stallData();
-        window.addEventListener('unhandledrejection', event => {
-          location.reload();
-          // Prevent error output on the console:
-          console.log('Reason: ' + event.reason);
-          event.preventDefault();
-          
-        }); 
-        console.log(allData);  
-          if(allData.length > 0) {   
-             resolve(allData); 
-          } else {
-             reject('data was not fetched');
-          }           
-        }).then(function(data){
+      var sessionChart;
+       getLaData().then(function(data){
           //console.log(data); 
          
             drawCanvas(400,400);
-            CHART = document.getElementById("chart-result");
+            sessionChart = document.getElementById("chart-result");
             var chartData = getChartArray(data);
-            var myFancyChart = populateChart(chartData, CHART);
+            var myFancyChart = populateChart(chartData, sessionChart);
             myFancyChart.render();
 
            return data;
@@ -202,127 +50,12 @@
   });
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
-      
-      $scope.noteNames = ["a","b","c","d","e","f","g"];
-      $scope.accidentals = [{sym:"♭", state:false, name:"flat"}, {sym:"♯", state:false, name:"sharp"}]
-      $scope.degrees = [
-        {
-          degree: "I",
-          degKey: 0,
-          alphaN: "1"
-        },
-        {
-          degree: "II",
-          degKey: 1,
-          alphaN: "2"
-        },
-        {
-          degree: "III",
-          degKey: 2,
-          alphaN: "3"
-        },
-        {
-          degree: "IV",
-          degKey: 3,
-          alphaN: "4"
-        },
-        {
-          degree: "V",
-          degKey: 4,
-          alphaN: "5"
-        },
-        {
-          degree: "VI",
-          degKey: 5,
-          alphaN: "6"
-        },
-        {
-          degree: "VII",
-          degKey: 6,
-          alphaN: "7"
-        }
-        
-      ];
-      $scope.keys = [
-        {
-          keyName: "C",
-          notes: ["c","d","e","f","g","a","b"],
-          index: 0
-        },
-        {
-          keyName: "G",
-          notes: ["g","a","b","c","d","e","f♯"],
-          index: 1
-        },
-        {
-          keyName: "D",
-          notes: ["d","e","f♯","g","a","b","c♯"],
-          index: 2
-          //D, E, F♯, G, A, B, C♯
-        },
-        {
-          keyName: "A",
-          notes: ["a","b","c♯","d","e","f♯","g♯"],
-          index: 3
-          //A, B, C♯, D, E, F♯, G♯
-        },
-        {
-          keyName: "E",
-          notes: ["e","f♯","g♯","a","b","c♯","d♯"],
-          index: 4
-          //E, F♯, G♯, A, B, C♯, D♯
-        },
-        {
-          keyName: "B",
-          notes: ["b","c♯","d♯","e","f♯","g♯","a♯"],
-          index: 5
-          //B, C♯, D♯, E, F♯, G♯, A♯
-          //C♭, D♭, E♭, F♭, G♭, A♭, B♭
-        },
-        {
-          keyName: "C♭",
-          notes: ["c♭","d♭","e♭","f♭","g♭","a♭","b♭"],
-          index: 6
-          //C♭, D♭, E♭, F♭, G♭, A♭, B♭
-        },
-        {
-          keyName: "F♯",
-          notes: ["f♯","g♯","a♯","b","c♯","d♯","e♯"],
-          index: 7
-          //F♯, G♯, A♯, B, C♯, D♯, E♯
-        },
-        {
-          keyName: "G♭",
-          notes: ["g♭","a♭","b♭","c♭","d♭","e♭","f"],
-          index: 8
-        },
-        {
-          keyName: "D♭",
-          notes: ["d♭","e♭","f","g♭","a♭","b♭","c"],
-          index: 9
-        },
-        {
-          keyName: "A♭",
-          notes: ["a♭","b♭","c","d♭","e♭","f","g"],
-          index: 10
-        },
-        {
-          keyName: "E♭",
-          notes: ["e♭","f","g","a♭","b♭","c","d"],
-          index: 11
-        },
-        {
-          keyName: "B♭",
-          notes: ["b♭","c","d","e♭","f","g","a"],
-          index: 12
-        },
-        {
-          keyName: "F",
-          notes: ["f","g","a","b♭","c","d","e"],
-          index: 13
-        }
-        
-      ];
+      // model.js data
+      $scope.noteNames = model.noteNames;
+      $scope.accidentals = model.accidentals; 
+      $scope.degrees = model.degrees; 
+      $scope.keys = model.keys; 
+
       $scope.theKey = $routeParams.theKey;
       $scope.keyArr = $routeParams.keyArr;
       $scope.leScore = $routeParams.leScore;
