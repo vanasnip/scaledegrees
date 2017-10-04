@@ -1,11 +1,11 @@
 
 
 <div id="sim-body" ng-controller="sessionResultsCtrl" >
-<div class="results">
+<div class="results col-xs-12">
 <button class="back-btn" ng-click="goHome()">←</button>
 	<div class="limiter">	
-			<div id="chart-div" class="col-xs-12"></div>
-			<div class="result-info col-xs-12">
+			<div id="chart-div" class="col-xs-12 col-sm-8"></div>
+			<div class="result-info col-xs-12 col-sm-4">
 				<h2 class="annou-score col-xs-12">You scored <span class="score-res">{{leScore}}</span> out of <span class="score-res">{{totalQuess}}</span></h2>
 				<h3 class="annou-time col-xs-12">time : <span class="score-res">{{time}} </span>sec</h3>
 				<h3 class="annou-time col-xs-12"> time per : <span class="score-res">{{(time / leScore).toFixed(2)}}</span> sec</h3>

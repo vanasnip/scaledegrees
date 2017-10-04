@@ -24,9 +24,6 @@ li.acci-btn-li {
 select.home-keyop, label {
 	font-size: 30px;	
 }
-select {
-	
-}
 
 label, select {
 	margin-left: auto;
@@ -68,7 +65,7 @@ h3.no-ques {
 	font-size: 17px;
 }
 
-select.key-sel,
+div.all-result-opt select,
 select.no-ques-sel {
 	border: #B3B6B7 1px solid;
 	background-color: black;
@@ -78,6 +75,28 @@ select.no-ques-sel {
 	height: 45px;
 	font-size: 25px;
 }
+
+div.all-result-opt h3{
+	font-size: 20px;
+}
+
+
+
+div.all-result-opt *{
+	display: inline;
+}
+div.all-result-opt {
+	border: #B3B6B7 1px solid;
+	border-radius: 5px;
+	text-align: center;
+}
+
+div.all-result-opt select {
+	width: 90px;
+	border: none;
+	outline: none;
+}
+
 .resp-answer {
 	height: 45px;
 }
@@ -92,7 +111,21 @@ button:hover {
 	border-color: #04b8bb;
 	color:#04b8bb;
 }
+@media only screen and (max-width: 450px){
+	div.all-result-opt h3{
+		font-size:15px;
+	}
 
+	div.all-result-opt select {
+		font-size: 18px;
+		width: 70px;
+	}
+
+	div.all-result-opt {
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+}
 
 
 
@@ -244,7 +277,8 @@ span.roman-deg {
 div.limiter {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-around;
+	align-items: center;
 	max-width: 800px;
 	margin: auto;
 }
@@ -412,9 +446,9 @@ div.reheight-key-test-title {
 	width: 100%;
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 767px){
 	div.reheight-button-box-home{
-		height: 7vh;
+		height: 5vh;
 		width: 100%;
 	}
 	div.reheight-selectKey{
@@ -433,6 +467,15 @@ div.reheight-key-test-title {
 
 canvas#chart-result {
 	display: inline-block;
+}
+
+@media only screen and (min-width: 768px){
+	div.results {
+		height: 98vh;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+	}
 }
 
 @keyframes slideInFromBottom {

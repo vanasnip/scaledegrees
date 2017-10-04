@@ -26,12 +26,18 @@
 
   app.controller('allResultsCtrl', function($scope, $route){
     $scope.l = function(x){l(x);};
-    var initialArray = [{keyName:'All', index: 0}];
-   $scope.resultingKeys = addAllKeyOptions(initialArray);
-   $scope.allKeys = $scope.resultingKeys[0];   
-   $scope.selectedAction = function(){
-     l($scope.allKeys);
-   }
+   var initKeyArray = [{keyName:'All', index: 0}];
+   $scope.resultingKeys = addAllKeyOptions(initKeyArray, model.keys);
+   $scope.allKeys = $scope.resultingKeys[0];      
+   $scope.changeKey = function(){l($scope.allKeys);}
+
+   var initDegreeArray = [{degree:'All', degKey: 0}];
+   $scope.resultingDegrees = addAllKeyOptions(initDegreeArray, model.degrees);
+   $scope.allDegrees = $scope.resultingDegrees[0];
+   $scope.changeDegree = function(){l($scope.allDegrees);}
+  
+
+   
    
 
 

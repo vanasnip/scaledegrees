@@ -1,16 +1,23 @@
 
 
 <div id="sim-body" ng-controller="allResultsCtrl" ng-init="selectedAction()">
-    <div class="results">
+    <div class="all-results">
         <button class="back-btn" ng-click="goHome()">←</button>
         <div class="limiter">	
             <div class="reheight-select-key-title-2"></div>	
-            <h3 class="key-sel col-xs-12">number of lala</h3>    
-            <div class="col-xs-12" id="key-sel">            
-                <select class="key-sel col-xs-4" ng-model="allKeys" ng-options="key as key.keyName for key in resultingKeys track by key.index" ng-model"allKeys" ng-change="selectedAction()">   		
+              
+            <div class="col-xs-5 all-result-opt col-sm-offset-1" id="key-sel">   
+                <h3 class="key-sel">Key :</h3>           
+                <select class="key-sel" ng-model="allKeys" ng-options="key as key.keyName for key in resultingKeys" ng-model="allKeys" ng-change="changeKey()">   		
                     <option value="allKeys"></option>
                 </select>
             </div>
+            <div class="col-xs-5 all-result-opt" id="degree-sel">   
+                    <h3 class="degree-sel">Deg :</h3>           
+                    <select class="degree-sel" ng-model="allDegrees" ng-options="degree as degree.degree for degree in resultingDegrees" ng-model="allDegrees" ng-change="changeDegree()">   		
+                        <option value="allDegrees"></option>
+                    </select>
+                </div>
         </div>
         <div id="chart-div" class="col-xs-12"></div>               
     </div>

@@ -139,9 +139,9 @@ function getLaData(){
     });
 }
 
-function addAllKeyOptions(array){
-    for(var i = 0; i < model.keys.length; i++){
-      array.push(model.keys[i]);
+function addAllKeyOptions(array, dataSrc){
+    for(var i = 0; i < dataSrc.length; i++){
+      array.push(dataSrc[i]);
     }
     return array;
   }
