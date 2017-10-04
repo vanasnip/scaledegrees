@@ -25,6 +25,15 @@
   });
 
   app.controller('allResultsCtrl', function($scope, $route){
+    $scope.l = function(x){l(x);};
+    var initialArray = [{keyName:'All', index: 0}];
+   $scope.resultingKeys = addAllKeyOptions(initialArray);
+   $scope.allKeys = $scope.resultingKeys[0];   
+   $scope.selectedAction = function(){
+     l($scope.allKeys);
+   }
+   
+
 
   });
   

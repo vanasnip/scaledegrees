@@ -1,4 +1,6 @@
-
+function l(input){
+    console.log(input);
+}
 
 function addToAllSessionData(item) {
     allSessionData.push(item);
@@ -136,3 +138,10 @@ function getLaData(){
         }
     });
 }
+
+function addAllKeyOptions(array){
+    for(var i = 0; i < model.keys.length; i++){
+      array.push(model.keys[i]);
+    }
+    return array;
+  }

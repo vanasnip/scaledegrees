@@ -44,79 +44,79 @@ var model = (function(){
       {
         keyName: "C",
         notes: ["c","d","e","f","g","a","b"],
-        index: 0
+        index: 1
       },
       {
         keyName: "G",
         notes: ["g","a","b","c","d","e","f♯"],
-        index: 1
+        index: 2
       },
       {
         keyName: "D",
         notes: ["d","e","f♯","g","a","b","c♯"],
-        index: 2
+        index: 3
         //D, E, F♯, G, A, B, C♯
       },
       {
         keyName: "A",
         notes: ["a","b","c♯","d","e","f♯","g♯"],
-        index: 3
+        index: 4
         //A, B, C♯, D, E, F♯, G♯
       },
       {
         keyName: "E",
         notes: ["e","f♯","g♯","a","b","c♯","d♯"],
-        index: 4
+        index: 5
         //E, F♯, G♯, A, B, C♯, D♯
       },
       {
         keyName: "B",
         notes: ["b","c♯","d♯","e","f♯","g♯","a♯"],
-        index: 5
+        index: 6
         //B, C♯, D♯, E, F♯, G♯, A♯
         //C♭, D♭, E♭, F♭, G♭, A♭, B♭
       },
       {
         keyName: "C♭",
         notes: ["c♭","d♭","e♭","f♭","g♭","a♭","b♭"],
-        index: 6
+        index: 7
         //C♭, D♭, E♭, F♭, G♭, A♭, B♭
       },
       {
         keyName: "F♯",
         notes: ["f♯","g♯","a♯","b","c♯","d♯","e♯"],
-        index: 7
+        index: 8
         //F♯, G♯, A♯, B, C♯, D♯, E♯
       },
       {
         keyName: "G♭",
         notes: ["g♭","a♭","b♭","c♭","d♭","e♭","f"],
-        index: 8
+        index: 9
       },
       {
         keyName: "D♭",
         notes: ["d♭","e♭","f","g♭","a♭","b♭","c"],
-        index: 9
+        index: 10
       },
       {
         keyName: "A♭",
         notes: ["a♭","b♭","c","d♭","e♭","f","g"],
-        index: 10
+        index: 11
       },
       {
         keyName: "E♭",
         notes: ["e♭","f","g","a♭","b♭","c","d"],
-        index: 11
+        index: 12
       },
       {
         keyName: "B♭",
         notes: ["b♭","c","d","e♭","f","g","a"],
-        index: 12
+        index: 13
       },
       {
         keyName: "F",
         notes: ["f","g","a","b♭","c","d","e"],
-        index: 13
+        index: 14
       }
       
     ];
