@@ -25,6 +25,7 @@
   });
 
   app.controller('allResultsCtrl', function($scope, $route){
+    $scope.typeOfChart = 'bar';
     $scope.l = function(x){l(x);};
    var initKeyArray = [{keyName:'All', index: 0}];
    $scope.resultingKeys = addAllKeyOptions(initKeyArray, model.keys);
@@ -36,18 +37,30 @@
    $scope.allDegrees = $scope.resultingDegrees[0];
    $scope.changeDegree = function(){l($scope.allDegrees);}
 
+   getLaData().then(function(data){    //console.log(data);    
+      drawCanvas(400,400);
+      sessionChart = document.getElementById("chart-result");
+      var chartData = getlastSessionChartArray(data);
+      var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart);
+      myFancyChart.render();
+
+     return data;
+   }).catch(function(error){
+     console.log(error);
+   });
+
   });
   
   app.controller('sessionResultsCtrl', function($scope, $route){
-
+    $scope.typeOfChart = 'bar';
       var sessionChart;
        getLaData().then(function(data){
           //console.log(data); 
          
             drawCanvas(400,400);
             sessionChart = document.getElementById("chart-result");
-            var chartData = getChartArray(data);
-            var myFancyChart = populateChart(chartData, sessionChart);
+            var chartData = getlastSessionChartArray(data);//custom for all resules
+            var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart);
             myFancyChart.render();
 
            return data;
@@ -64,8 +77,7 @@
       $scope.noteNames = model.noteNames;
       $scope.accidentals = model.accidentals; 
       $scope.degrees = model.degrees; 
-      $scope.keys = model.keys; 
-
+      $scope.keys = model.keys;
       $scope.theKey = $routeParams.theKey;
       $scope.keyArr = $routeParams.keyArr;
       $scope.leScore = $routeParams.leScore;

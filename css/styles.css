@@ -188,15 +188,19 @@ button.start-btn {
 	color: #D484FE;
 }
 
+
 .key-test button.col-xs-12.acci-btn.flat {
 	border-color: #FDBF1F;
 	color: #FDBF1F;
 }
+
 .key-test button.col-xs-12.acci-btn.flat-clicked,
 .key-test button.col-xs-12.acci-btn.sharp-clicked{
-
-	border-width: 3px;
+	border-width: 4px;
+	font-size: 30px;
+	font-weight: 700;
 }
+
 
 button.select-key-btn:focus,
 button.start-btn {

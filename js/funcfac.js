@@ -46,8 +46,12 @@ function drawCanvas(height, width) {
 async function stallData() {
     return await idbApp.getSessions()
 };
+function getAllSessAllDegreeChartData(asyncData){
+    //array of all key names - for x axis
+    //array of avarage of of the last 5 sessions for each key
+}
 
-function getChartArray(asyncData) {
+function getlastSessionChartArray(asyncData) {
     //process data
     var finalArray = [];
     // which key to result 
@@ -91,10 +95,10 @@ function getChartArray(asyncData) {
     return finalArray
 }
 
-function populateChart(data, theChart) {
-    console.log(data);
+function populateChart(data, theChart, chartType) {
+    //console.log(data);
     let chartObject = new Chart(theChart, {
-        type: 'bar',
+        type: chartType,
         data: {
             labels: data,
             datasets: [{
@@ -130,7 +134,7 @@ function getLaData(){
             console.log('Reason: ' + event.reason);
             event.preventDefault();
         });
-        console.log(allData);
+        //console.log(allData);
         if (allData.length > 0) {
             resolve(allData);
         } else {
