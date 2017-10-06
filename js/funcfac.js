@@ -141,7 +141,27 @@ function getLaData(){
 
 function addAllKeyOptions(array, dataSrc){
     for(var i = 0; i < dataSrc.length; i++){
-      array.push(dataSrc[i]);
+        array.push(dataSrc[i]);
     }
     return array;
-  }
+}
+
+function toggleAcci(set){
+
+    if(set == 'flat'){
+        var other = document.getElementsByClassName('sharp')[0];
+        other.classList.remove('sharp-clicked');
+        l(other);
+    } else {
+        var other = document.getElementsByClassName('flat')[0];
+        other.classList.remove('flat-clicked');
+        l(other);
+    }
+    
+    var element = document.getElementsByClassName(set)[0];
+    var classSet = set + '-clicked';
+    l(element);
+
+
+    element.classList.toggle(classSet);
+}

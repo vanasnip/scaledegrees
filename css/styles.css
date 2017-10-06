@@ -192,13 +192,12 @@ button.start-btn {
 	border-color: #FDBF1F;
 	color: #FDBF1F;
 }
-.key-test button.col-xs-12.acci-btn:focus {
+.key-test button.col-xs-12.acci-btn.flat-clicked,
+.key-test button.col-xs-12.acci-btn.sharp-clicked{
 
 	border-width: 3px;
 }
-button.acci-btn:focus {
-	border-width: 3px;
-}
+
 button.select-key-btn:focus,
 button.start-btn {
 	border-color: #04b8bb;
@@ -459,7 +458,7 @@ div.reheight-key-test-title {
 		height: 2vh;
 		width: 100%;
 	}
-	button.acci-btn:focus,
+
     button.acci-btn:hover {
     	border-width: 3px;
     }

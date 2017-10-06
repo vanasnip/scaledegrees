@@ -35,11 +35,6 @@
    $scope.resultingDegrees = addAllKeyOptions(initDegreeArray, model.degrees);
    $scope.allDegrees = $scope.resultingDegrees[0];
    $scope.changeDegree = function(){l($scope.allDegrees);}
-  
-
-   
-   
-
 
   });
   
@@ -130,6 +125,7 @@
       $scope.romanNumDeg = "";
       $scope.dispDegree = "";
       $scope.answer = "";
+      $scope.acciStat = false;
       $scope.acci = [false, ""];
       $scope.settingStat = false;
       $scope.romaOrAlpha = true;
@@ -138,7 +134,10 @@
 
 
       $scope.accihap = function(mod){
-        $scope.acci = [true, mod];
+        $scope.acciStat = !$scope.acciStat;
+
+        $scope.acci = [$scope.acciStat, mod];
+        console.log($scope.acciStat);
       };
 
 
@@ -236,6 +235,10 @@
           $scope.theQuests =  getQNAObj(obj);
           //console.log($scope.theQuests);        
           $scope.romanNumDeg = $scope.theQuests.ques;          
+      }
+
+      $scope.toggleAcci = function(x){
+        toggleAcci(x);
       }
 
       $scope.respondings = function(note){
