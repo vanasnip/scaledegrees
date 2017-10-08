@@ -27,6 +27,7 @@
   app.controller('allResultsCtrl', function($scope, $route){
     $scope.typeOfChart = 'bar';
     $scope.l = function(x){l(x);};
+
    var initKeyArray = [{keyName:'All', index: 0}];
    $scope.resultingKeys = addAllKeyOptions(initKeyArray, model.keys);
    $scope.allKeys = $scope.resultingKeys[0];      
@@ -36,12 +37,22 @@
    $scope.resultingDegrees = addAllKeyOptions(initDegreeArray, model.degrees);
    $scope.allDegrees = $scope.resultingDegrees[0];
    $scope.changeDegree = function(){l($scope.allDegrees);}
+   $scope.selectedAction = function(){
+     $scope.changeKey();
+     $scope.changeDegree();
+   }
 
-   getLaData().then(function(data){    //console.log(data);    
+  
+
+    var chartLabels = getAllKeyNames();
+
+   getLaData().then(function(data){    
+      //console.log(data);  
+       
       drawCanvas(400,400);
       sessionChart = document.getElementById("chart-result");
-      var chartData = getlastSessionChartArray(data);
-      var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart);
+      var chartData = getAllSessAllDegChartData(data);
+      var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, true, chartLabels);
       myFancyChart.render();
 
      return data;
@@ -60,7 +71,7 @@
             drawCanvas(400,400);
             sessionChart = document.getElementById("chart-result");
             var chartData = getlastSessionChartArray(data);//custom for all resules
-            var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart);
+            var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, false, null);
             myFancyChart.render();
 
            return data;
