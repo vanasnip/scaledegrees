@@ -105,7 +105,7 @@ function getAllKeyNames(){
 
 function categoriseSessions(names, data){
     var allArray = [];
-    console.log(data);
+    //console.log(data);
     //for each key scan put in keySet array, then put in array when don
     // session loop until name matches
     for(var name of names){
@@ -126,7 +126,7 @@ function categoriseSessions(names, data){
 
     //when match 
  
-    console.log(allArray);
+    //console.log(allArray);
     return allArray;
 }
 
@@ -278,5 +278,5 @@ function toggleAcci(set){
 }
 
 function chartMaker(){
-    
+
 }

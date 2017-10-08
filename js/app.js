@@ -43,7 +43,7 @@
    $scope.selectedAction = function(){
      var key = $scope.allKeys;
      var deg = $scope.allDegrees;
-     
+
      var chartLabels = getAllKeyNames();
      
         getLaData().then(function(data){    
@@ -52,11 +52,30 @@
            drawCanvas(400,400);
            sessionChart = document.getElementById("chart-result");
            var chartData = (function(){
-             console.log([$scope.allKeys.keyName, $scope.allDegrees.degree].join(' '));
-             switch([$scope.allKeys.keyName, $scope.allDegrees.degree].join(' ')) {
+             var key = $scope.allKeys.keyName;
+             var deg = $scope.allDegrees.degree
+  
+             switch([key, deg].join(' ')) {
                case 'All All':
-                   return getAllSessAllDegChartData(data);
-                   break;
+                    console.log(key + ' ' + deg);
+                    return getAllSessAllDegChartData(data);
+                    break;
+
+               case ['All', deg].join(' '):
+                    console.log(key + ' ' + deg);
+                    return getAllSessAllDegChartData(data);
+                    break;
+
+               case [key, 'All'].join(' '):
+                    console.log(key + ' ' + deg);
+                    return getAllSessAllDegChartData(data);
+                    break;
+                    
+              case [key, deg].join(' '):
+                    console.log(key + ' ' + deg);
+                    return getAllSessAllDegChartData(data);
+                    break;
+
                default:
                     return getlastSessionChartArray(data);
              }
@@ -87,7 +106,7 @@
             drawCanvas(400,400);
             sessionChart = document.getElementById("chart-result");
             var chartData = getlastSessionChartArray(data);//custom for all resules
-            var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, false, null);
+            var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, false, chartData);
             myFancyChart.render();
 
            return data;
