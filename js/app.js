@@ -26,6 +26,7 @@
 
   app.controller('allResultsCtrl', function($scope, $route){
     $scope.typeOfChart = 'bar';
+    var myChartData;
     $scope.l = function(x){l(x);};
 
    var initKeyArray = [{keyName:'All', index: 0}];
@@ -37,28 +38,43 @@
    $scope.resultingDegrees = addAllKeyOptions(initDegreeArray, model.degrees);
    $scope.allDegrees = $scope.resultingDegrees[0];
    $scope.changeDegree = function(){l($scope.allDegrees);}
+   
+   
    $scope.selectedAction = function(){
-     $scope.changeKey();
-     $scope.changeDegree();
+     var key = $scope.allKeys;
+     var deg = $scope.allDegrees;
+     
+     var chartLabels = getAllKeyNames();
+     
+        getLaData().then(function(data){    
+           //console.log(data);  
+            
+           drawCanvas(400,400);
+           sessionChart = document.getElementById("chart-result");
+           var chartData = (function(){
+             console.log([$scope.allKeys.keyName, $scope.allDegrees.degree].join(' '));
+             switch([$scope.allKeys.keyName, $scope.allDegrees.degree].join(' ')) {
+               case 'All All':
+                   return getAllSessAllDegChartData(data);
+                   break;
+               default:
+                    return getlastSessionChartArray(data);
+             }
+           })();
+           var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, true, chartLabels);
+           myFancyChart.render();
+     
+          return data;
+        }).catch(function(error){
+          console.log(error);
+        });
+
+     
    }
 
   
 
-    var chartLabels = getAllKeyNames();
 
-   getLaData().then(function(data){    
-      //console.log(data);  
-       
-      drawCanvas(400,400);
-      sessionChart = document.getElementById("chart-result");
-      var chartData = getAllSessAllDegChartData(data);
-      var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, true, chartLabels);
-      myFancyChart.render();
-
-     return data;
-   }).catch(function(error){
-     console.log(error);
-   });
 
   });
   

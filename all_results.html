@@ -8,13 +8,13 @@
               
             <div class="col-xs-5 all-result-opt col-sm-offset-1" id="key-sel">   
                 <h3 class="key-sel">Key :</h3>           
-                <select class="key-sel" ng-model="allKeys" ng-options="key as key.keyName for key in resultingKeys" ng-model="allKeys" ng-change="selectedAction()">   		
+                <select class="key-sel" ng-model="allKeys" ng-options="key as key.keyName for key in resultingKeys" ng-model="allKeys" ng-change="selectedAction(key)">   		
                     <option value="allKeys"></option>
                 </select>
             </div>
             <div class="col-xs-5 all-result-opt" id="degree-sel">   
                     <h3 class="degree-sel">Deg :</h3>           
-                    <select class="degree-sel" ng-model="allDegrees" ng-options="degree as degree.degree for degree in resultingDegrees" ng-model="allDegrees" ng-change="selectedAction()">   		
+                    <select class="degree-sel" ng-model="allDegrees" ng-options="degree as degree.degree for degree in resultingDegrees" ng-model="allDegrees" ng-change="selectedAction(degree)">   		
                         <option value="allDegrees"></option>
                     </select>
                 </div>
