@@ -58,6 +58,7 @@
              switch([key, deg].join(' ')) {
                case 'All All':
                     console.log(key + ' ' + deg);
+                    getAllSessSelectedDegreeChartData(data);
                     return getAllSessAllDegChartData(data);
                     break;
 

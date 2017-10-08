@@ -161,9 +161,41 @@ function getLastFiveAvg(array){
             finalArray.push(0);
         }
     }
-    console.log(finalArray);
+    //console.log(finalArray);
     return finalArray;
 } 
+function getDegrees(arr){
+    var answers = [];
+    for(var ans of arr.answers){
+        answers.push(ans);
+    }
+    return answers; 
+}
+function getExtractedDegrees(keysCatFive){
+    var array = [];
+    for(var key of keysCatFive){
+        var keyDegDeg = []
+        for(var arr of key.keyData){
+            keyDegDeg.push(getDegrees(arr));
+        }
+        array.push(keyDegDeg);
+    }
+    return array;
+}
+function getSortedDegree(array){
+    for(var key of array){
+        //****************** */
+    }
+}
+function getAllSessSelectedDegreeChartData(asyncData){
+    var xAxis = getAllKeyNames();
+    var categoryKeys = categoriseSessions(xAxis, asyncData);
+    var lastFiveSession = getLastFive(categoryKeys);
+    var extractedDegrees = getExtractedDegrees(lastFiveSession);
+    var extractedDegrees = getExtractedDegrees(lastFiveSession);
+    var sortDegrees = getSortedDegree(extractedDegrees);
+    console.log(extractedDegrees);
+}
 
 function getAllSessAllDegChartData(asyncData){
     //array of all key names - for x axis
