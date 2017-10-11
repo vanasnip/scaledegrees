@@ -58,25 +58,24 @@
              switch([key, deg].join(' ')) {
                case 'All All':
                     //console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data, key, deg);
                     return getAllSessAllDegChartData(data);
                     break;
 
                case ['All', deg].join(' '):
                     //console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data, key, deg);
-                    return getAllSessAllDegChartData(data);
+                    return getAllSessSelectedDegreeChartData(data, key, deg, 0);
+                   
                     break;
 
                case [key, 'All'].join(' '):
                     //console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data, key, deg);
+                    getAllSessSelectedDegreeChartData(data, key, deg, 1);
                     return getAllSessAllDegChartData(data);
                     break;
                     
               case [key, deg].join(' '):
                     //console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data, key, deg);
+                    getAllSessSelectedDegreeChartData(data, key, deg, 2);
                     return getAllSessAllDegChartData(data);
                     break;
 
