@@ -171,7 +171,7 @@ function getDegrees(arr){
     }
     return answers; 
 }
-function getExtractedDegrees(keysCatFive){
+function getExtractedAnswers(keysCatFive){
     var array = [];
     for(var key of keysCatFive){
         var keyDegDeg = []
@@ -182,19 +182,98 @@ function getExtractedDegrees(keysCatFive){
     }
     return array;
 }
-function getSortedDegree(array){
+function getSortedAnswers(array){
+    var finalArray = [];
     for(var key of array){
         //****************** */
+        var tempArray = [];
+        for (var answers of key){
+            for(var ans of answers){
+                tempArray.push(ans);
+            }
+        }
+        finalArray.push(tempArray);        
     }
+   // console.log(finalArray);
+    return finalArray;
 }
-function getAllSessSelectedDegreeChartData(asyncData){
+function getSortedDegrees(array){
+    finalArray = [];
+    for(var ans of array){
+        for(var i = 0; i < ans.length; i++){
+            var time;            
+            if(i == 0){
+                time = cleanResultTime(ans[i].id - ans[i].session);
+            }else {
+                if(ans[i].session == ans[i - 1].session){
+                    time = cleanResultTime(ans[i].id - ans[i - 1].id);
+                }
+            }
+            var degObj = {
+                key: ans[i].mKey,
+                degree: ans[i].degree,
+                correct: ans[i].correct,
+                time: time
+            }
+            finalArray.push(degObj);
+        }
+    }
+    console.log(finalArray);
+    return finalArray;
+}
+
+function getAllSessSelectedDegreeChartData(asyncData, key, deg){
     var xAxis = getAllKeyNames();
     var categoryKeys = categoriseSessions(xAxis, asyncData);
     var lastFiveSession = getLastFive(categoryKeys);
-    var extractedDegrees = getExtractedDegrees(lastFiveSession);
-    var extractedDegrees = getExtractedDegrees(lastFiveSession);
-    var sortDegrees = getSortedDegree(extractedDegrees);
-    console.log(extractedDegrees);
+    var extractedAnswers = getExtractedAnswers(lastFiveSession);
+    var sortAnswers = getSortedAnswers(extractedAnswers);
+    var sortDegrees = getSortedDegrees(sortAnswers);
+
+
+
+    switch([key, deg].join(' ')) {
+        case 'All All':
+             console.log(key + ' ' + deg);
+             console.log('all all in func');
+             return getlastSessionChartArray(asyncData);
+             break;
+
+        case ['All', deg].join(' '):
+             console.log(key + ' ' + deg);
+             console.log('all key in func');
+             var allDegArray = []
+             for(var xKey of xAxis){
+                 var tempArray = [];
+                 for(var srtDeg of sortDegrees){
+                     if(srtDeg.key == xKey && srtDeg.degree.ques == deg){
+                         tempArray.push(srtDeg);
+                     }
+                 }
+                 allDegArray.push(tempArray);
+             }
+             console.log(allDegArray);
+             return;
+             break;
+
+        case [key, 'All'].join(' '):
+             console.log(key + ' ' + deg);
+             console.log('all degree in func');
+             return;
+             break;
+             
+       case [key, deg].join(' '):
+             console.log(key + ' ' + deg);
+             console.log('neither in func');
+             return;
+             break;
+
+        default:
+             return getlastSessionChartArray(data);
+             
+      }
+    
+    //console.log(extractedDegrees);
 }
 
 function getAllSessAllDegChartData(asyncData){

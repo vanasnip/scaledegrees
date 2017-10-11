@@ -53,27 +53,30 @@
            sessionChart = document.getElementById("chart-result");
            var chartData = (function(){
              var key = $scope.allKeys.keyName;
-             var deg = $scope.allDegrees.degree
+             var deg = $scope.allDegrees.degree;
   
              switch([key, deg].join(' ')) {
                case 'All All':
-                    console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data);
+                    //console.log(key + ' ' + deg);
+                    getAllSessSelectedDegreeChartData(data, key, deg);
                     return getAllSessAllDegChartData(data);
                     break;
 
                case ['All', deg].join(' '):
-                    console.log(key + ' ' + deg);
+                    //console.log(key + ' ' + deg);
+                    getAllSessSelectedDegreeChartData(data, key, deg);
                     return getAllSessAllDegChartData(data);
                     break;
 
                case [key, 'All'].join(' '):
-                    console.log(key + ' ' + deg);
+                    //console.log(key + ' ' + deg);
+                    getAllSessSelectedDegreeChartData(data, key, deg);
                     return getAllSessAllDegChartData(data);
                     break;
                     
               case [key, deg].join(' '):
-                    console.log(key + ' ' + deg);
+                    //console.log(key + ' ' + deg);
+                    getAllSessSelectedDegreeChartData(data, key, deg);
                     return getAllSessAllDegChartData(data);
                     break;
 
