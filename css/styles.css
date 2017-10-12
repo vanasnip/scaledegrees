@@ -533,10 +533,46 @@ body {
     overflow:hidden;
 }
 .green, .lime, .yellow, .orange, .red {border-width: 2px;}
-.green	{border-color: #00C521;}
-.lime   {border-color: #A1D489;}
-.yellow {border-color: #FBFF00}
-.orange {border-color: #F7942C}
+.green	{border-color: #04b8bb;}
+.lime   {border-color: #00C521;}
+.yellow {border-color: #FBFF00;}
+.orange {border-color: #F7942C;}
 .red	{border-color: #8F0202;}
+
+.star-box div {height: 1px;}
+.star-box.box-1 div {background-color: #04b8bb;}
+.star-box.box-2 div {background-color: #00C521;}
+.star-box.box-3 div {background-color: #FBFF00;}
+.star-box.box-4 div {background-color: #F7942C;}
+.star-box.box-5 div {background-color: #8F0202;}
+
+.star-box.box-1 span {color: #04b8bb;}
+.star-box.box-2 span {color: #00C521;}
+.star-box.box-3 span {color: #FBFF00;}
+.star-box.box-4 span {color: #F7942C;}
+.star-box.box-5 span {color: #8F0202;}
+
+.col-xsc-5{
+	width: 20%;
+	float: left;
+}
+.star-box.box-1{width: 33.33%;}
+.star-box.box-2{width: 26.66%;}
+.star-box.box-3{width: 20%;}
+.star-box.box-4{width: 13.33%;}
+.star-box.box-5{width: 6.66%;}
+
+li.star-box {
+	text-align: center;
+	letter-spacing: 5px;
+	font-size: 9px;
+}
+.star-box div{
+	margin-bottom: 4px;
+}
+
+ul.star-box {
+	margin-top: 10px;
+}
 
 

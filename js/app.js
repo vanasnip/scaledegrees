@@ -184,7 +184,7 @@
 
       }
 
-      $scope.noQuestion = [2,10,50,100];
+      $scope.noQuestion = [20,10,50,100,2];
 
       $scope.enquiries = $scope.noQuestion[0];
       $scope.score = 0;
