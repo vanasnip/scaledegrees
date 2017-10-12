@@ -69,13 +69,13 @@
 
                case [key, 'All'].join(' '):
                     //console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data, key, deg, 1);
+                    getSelectedKeyAllDegreeChartData(data, key, deg, 1);
                     return getAllSessAllDegChartData(data);
                     break;
                     
               case [key, deg].join(' '):
                     //console.log(key + ' ' + deg);
-                    getAllSessSelectedDegreeChartData(data, key, deg, 2);
+                    getSelectedKeyAllDegreeChartData(data, key, deg, 2);
                     return getAllSessAllDegChartData(data);
                     break;
 
@@ -198,6 +198,7 @@
         $scope.acciStat = !$scope.acciStat;
 
         $scope.acci = [$scope.acciStat, mod];
+        $scope.acciStat = false;
         console.log($scope.acciStat);
       };
 
@@ -307,6 +308,7 @@
         if ($scope.acci[0]){
           note = note + $scope.acci[1].sym;
           $scope.acci[0] = false;
+          $scope.acciStat = false;
         };
         if(note === $scope.theQuests.answ){
           $scope.correct[1]++;
@@ -355,6 +357,9 @@
           
           $scope.quality = "wrong"
           $scope.answer = "not quite, try again";
+          $scope.acci[0] = false;          
+          $scope.acciStat = false;
+          clearAllAcciStyle();
         }
       }
 

@@ -106,7 +106,14 @@ function getAllKeyNames(){
         allKeysArray.push(key.keyName);
     }
     return allKeysArray;
-}   
+}
+function getAllDegreeNmaes(){
+    var allDegreeArray = [];
+    for(var deg of model.degrees){
+        allDegreeArray.push(deg.degree);
+    }
+    return allDegreeArray;
+}
 
 function categoriseSessions(names, data){
     
@@ -256,6 +263,13 @@ function getFinalArrayPrep(array){
     return finalArray;
 }
 
+function getSelectedKeyAllDegreeChartData(asyncData,key,deg,situ){
+    var xAxis = getAllDegreeNmaes();
+    //console.log(xAxis);
+    
+
+}
+
 
 function getAllSessSelectedDegreeChartData(asyncData,key,deg,situ){
     var xAxis = getAllKeyNames();
@@ -264,6 +278,7 @@ function getAllSessSelectedDegreeChartData(asyncData,key,deg,situ){
     var extractedAnswers = getExtractedAnswers(lastFiveSession);
     var sortAnswers = getSortedAnswers(extractedAnswers);
     var sortDegrees = getSortedDegrees(sortAnswers);
+    console.log(sortDegrees);
     var filteredSortedDeg = getFilteredDeg(sortDegrees, key, deg, xAxis);
     var sendFinalArray = getFinalArrayPrep(filteredSortedDeg);
     return sendFinalArray;
@@ -382,6 +397,14 @@ function toggleAcci(set){
     element.classList.toggle(classSet);
 }
 
-function chartMaker(){
+function clearAllAcciStyle(){
+    
+    var sharp = document.getElementsByClassName('sharp')[0];
+    var flat = document.getElementsByClassName('flat')[0];
+
+    sharp.classList.remove('sharp-clicked');
+    flat.classList.remove('flat-clicked');
+
+    console.log('entered clear all styles');
 
 }
