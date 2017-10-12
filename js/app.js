@@ -321,10 +321,10 @@
           $scope.correct[1]++;
           $scope.acci[0] = false;          
           $scope.acciStat = false;
+          clearAllAcciStyle();
           //console.log($scope.gotItRight);
           if($scope.gotItRight == true){        
-            $scope.score++;
-           
+            $scope.score++;           
           };
           var sessionObject = {
             session: $scope.leStart,
