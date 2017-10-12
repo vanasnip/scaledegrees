@@ -122,6 +122,13 @@
   });
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
+
+      getLaData().then(function(data){
+        var theScore = getAllSessAllDegChartData(data);
+        conditionalStyling(theScore);
+      }).catch(function(error){
+        console.log(error);
+      });
       // model.js data
       $scope.noteNames = model.noteNames;
       $scope.accidentals = model.accidentals; 
@@ -312,6 +319,8 @@
         };
         if(note === $scope.theQuests.answ){
           $scope.correct[1]++;
+          $scope.acci[0] = false;          
+          $scope.acciStat = false;
           //console.log($scope.gotItRight);
           if($scope.gotItRight == true){        
             $scope.score++;

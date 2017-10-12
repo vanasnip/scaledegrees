@@ -36,7 +36,7 @@
 				<div class="reheight-button-box-home"></div>
 				<ul class="col-xs-12 button-box home">
 					<li class="col-xs-3 select-key" ng-model="myKeys" ng-repeat="key in keys">
-						<button class="col-xs-12 select-key-btn" ng-click="global.myAction = true; selectKey(key)">{{key.keyName}}</button>
+						<button class="col-xs-12 select-key-btn" ng-class="key.keyName" ng-click="global.myAction = true; selectKey(key)">{{key.keyName}}</button>
 					</li>				
 				</ul>			
 			</div>

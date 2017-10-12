@@ -408,3 +408,60 @@ function clearAllAcciStyle(){
     console.log('entered clear all styles');
 
 }
+function filterStyles(key){
+    var keyButton = document.getElementsByClassName(key.key)[0];
+    var addClass;
+   
+    switch(true){
+        case (key.time == 0):
+            //console.log(key.time + ' white');
+            break;
+        case (key.time < 1.5):
+            //console.log(0);
+            addClassColour = 'green';       
+            keyButton.classList.add(addClassColour);
+            break;
+        case (key.time < 2):
+            //console.log(key.time + ' lime');
+            addClassColour = 'lime';       
+            keyButton.classList.add(addClassColour);
+            break;
+        case (key.time < 3):
+            //console.log(key.time + ' yello');
+            addClassColour = 'yellow';       
+            keyButton.classList.add(addClassColour);
+            break;
+        case (key.time < 4):
+            //console.log(key.time + ' orange');
+            addClassColour = 'orange';       
+            keyButton.classList.add(addClassColour);
+            break;
+        case (key.time > 4):
+            //console.log(key.time + ' red'); 
+            addClassColour = 'red';       
+            keyButton.classList.add(addClassColour);
+            break;  
+        default:
+            console.log('going back in time are we?');
+            break;  
+    }
+}
+function conditionalStyling(array){
+    // loop through all avarages
+    // label with keyname 
+    var keyObjArray = [];
+    for(var i = 0; i < array.length; i++){
+        var obj = {
+            key: model.keys[i].keyName,
+            time: array[i]
+        }
+        keyObjArray.push(obj);
+    }
+  
+    for(var key of keyObjArray){
+        filterStyles(key); 
+    }
+        // filter each results
+        //apply class according to filter
+}
+

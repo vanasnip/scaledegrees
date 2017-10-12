@@ -182,6 +182,9 @@ button.start-btn {
 button.start-btn {
 	margin-top: 20px;
 }
+.key-test button.col-xs-12.acci-btn{
+	border-width: 1px;
+}
 
 .key-test button.col-xs-12.acci-btn.sharp {
 	border-color: #D484FE;
@@ -529,4 +532,11 @@ div.result-info {
 body {
     overflow:hidden;
 }
+.green, .lime, .yellow, .orange, .red {border-width: 2px;}
+.green	{border-color: #00C521;}
+.lime   {border-color: #A1D489;}
+.yellow {border-color: #FBFF00}
+.orange {border-color: #F7942C}
+.red	{border-color: #8F0202;}
+
 
