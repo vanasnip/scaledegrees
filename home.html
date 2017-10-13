@@ -21,7 +21,7 @@
 
 
 
-			<div ng-hide="settingStat" class="col-xs-12 question-main">
+			<div ng-hide="settingStat" class="col-xs-12 question-main" ng-init="conditionallyFormat()">
 				<ul class="col-xs-12 home-header">
 					<li class="col-xs-3 setting-li"><button ng-click="settingStat = !settingStat" class="settings-btn"><img src="images/settings.png" alt="" class="settings-img"></button></li>
 					<li class="col-xs-6 header-title"><label class="col-xs-12">Select A Key</label></li>

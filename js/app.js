@@ -44,7 +44,7 @@
      var key = $scope.allKeys;
      var deg = $scope.allDegrees;
 
-     var chartLabels = getAllKeyNames();
+     var chartLabels;
      
         getLaData().then(function(data){    
            //console.log(data);  
@@ -58,23 +58,26 @@
              switch([key, deg].join(' ')) {
                case 'All All':
                     //console.log(key + ' ' + deg);
+                    chartLabels = getAllKeyNames();
                     return getAllSessAllDegChartData(data);
                     break;
 
                case ['All', deg].join(' '):
                     //console.log(key + ' ' + deg);
+                    chartLabels = getAllKeyNames();
                     return getAllSessSelectedDegreeChartData(data, key, deg, 0);
                    
                     break;
 
                case [key, 'All'].join(' '):
                     //console.log(key + ' ' + deg);
-                    getSelectedKeyAllDegreeChartData(data, key, deg, 1);
-                    return getAllSessAllDegChartData(data);
+                    chartLabels = getAllDegreeNames();
+                    return getSelectedKeyAllDegreeChartData(data, key, deg, 1);
                     break;
                     
               case [key, deg].join(' '):
                     //console.log(key + ' ' + deg);
+                    chartLabels = getAllKeyNames();
                     getSelectedKeyAllDegreeChartData(data, key, deg, 2);
                     return getAllSessAllDegChartData(data);
                     break;
@@ -122,13 +125,15 @@
   });
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
-
-      getLaData().then(function(data){
-        var theScore = getAllSessAllDegChartData(data);
-        conditionalStyling(theScore);
-      }).catch(function(error){
-        console.log(error);
-      });
+      $scope.conditionallyFormat = function(){
+        getLaData().then(function(data){
+          var theScore = getAllSessAllDegChartData(data);
+          conditionalStyling(theScore);
+        }).catch(function(error){
+          console.log(error);
+        });
+      }
+      
       // model.js data
       $scope.noteNames = model.noteNames;
       $scope.accidentals = model.accidentals; 

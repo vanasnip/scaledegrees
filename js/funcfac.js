@@ -107,7 +107,7 @@ function getAllKeyNames(){
     }
     return allKeysArray;
 }
-function getAllDegreeNmaes(){
+function getAllDegreeNames(){
     var allDegreeArray = [];
     for(var deg of model.degrees){
         allDegreeArray.push(deg.degree);
@@ -262,27 +262,69 @@ function getFinalArrayPrep(array){
     }
     return finalArray;
 }
-
-function getSelectedKeyAllDegreeChartData(asyncData,key,deg,situ){
-    var xAxis = getAllDegreeNmaes();
-    //console.log(xAxis);
-    
-
-}
-
-
-function getAllSessSelectedDegreeChartData(asyncData,key,deg,situ){
+function sortAndGetDegrees(asyncData){
     var xAxis = getAllKeyNames();
     var categoryKeys = categoriseSessions(xAxis, asyncData);
     var lastFiveSession = getLastFive(categoryKeys);
     var extractedAnswers = getExtractedAnswers(lastFiveSession);
     var sortAnswers = getSortedAnswers(extractedAnswers);
     var sortDegrees = getSortedDegrees(sortAnswers);
-    console.log(sortDegrees);
-    var filteredSortedDeg = getFilteredDeg(sortDegrees, key, deg, xAxis);
+    return {
+        degrees: sortDegrees,
+        axis: xAxis
+    };
+}
+function getFilteredSelectedKet(Data, key){
+    var array = [];
+    for(var ans of Data){
+        if(ans.key == key){
+            array.push(ans);
+        }
+    }
+    //console.log(array)
+    return array;
+}
+function getDegreeCategoriser(data){
+    var xAxis = getAllDegreeNames();
+    var array = [];
+    for (var deg of xAxis){
+        var tempArray = []
+        for(var ans of data){
+            var i = 0;
+            if(ans.correct && ans.degree.ques == deg){
+               
+                tempArray.push(ans.time);
+            }
+        }
+        var obj = {
+            deg: deg,
+            keyData: tempArray
+        }
+        array.push(obj);
+    }
+    //console.log(array);
+    return array;
+}
+function getSelectedKeyAllDegreeChartData(asyncData,key,deg,situ){
+    
+    var sortDegrees = sortAndGetDegrees(asyncData);
+    var filterIntoSelectedKey = getFilteredSelectedKet(sortDegrees.degrees, key)
+    var categoriseIntoDegrees = getDegreeCategoriser(filterIntoSelectedKey)
+    var lastFiveInstances = getLastFive(categoriseIntoDegrees);
+    var lastFiveAvg = getFinalArrayPrep(lastFiveInstances)
+    console.log(lastFiveAvg);
+    return lastFiveAvg;
+
+    
+
+}
+
+
+function getAllSessSelectedDegreeChartData(asyncData,key,deg,situ){
+    var sortDegrees = sortAndGetDegrees(asyncData);
+    var filteredSortedDeg = getFilteredDeg(sortDegrees.degrees, key, deg, sortDegrees.axis);
     var sendFinalArray = getFinalArrayPrep(filteredSortedDeg);
     return sendFinalArray;
-    //console.log(extractedDegrees);
 }
 
 function getAllSessAllDegChartData(asyncData){
