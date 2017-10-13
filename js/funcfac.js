@@ -1,6 +1,3 @@
-function l(input){
-    console.log(input);
-}
 
 function addToAllSessionData(item) {
     allSessionData.push(item);
@@ -17,9 +14,7 @@ function cleanSessionData(data) {
 
 function cleanResultTime(rawTime) {
     var elapsed = Math.floor(rawTime / 100) / 10;
-    if (Math.round(elapsed) == elapsed) {
-        elapsed += '.0';
-    };
+    
     return elapsed;
 }
 
@@ -290,7 +285,6 @@ function getDegreeCategoriser(data){
     for (var deg of xAxis){
         var tempArray = []
         for(var ans of data){
-            var i = 0;
             if(ans.correct && ans.degree.ques == deg){
                
                 tempArray.push(ans.time);
@@ -310,9 +304,10 @@ function getSelectedKeyAllDegreeChartData(asyncData,key,deg,situ){
     var sortDegrees = sortAndGetDegrees(asyncData);
     var filterIntoSelectedKey = getFilteredSelectedKet(sortDegrees.degrees, key)
     var categoriseIntoDegrees = getDegreeCategoriser(filterIntoSelectedKey)
-    var lastFiveInstances = getLastFive(categoriseIntoDegrees);
-    var lastFiveAvg = getFinalArrayPrep(lastFiveInstances)
-    console.log(lastFiveAvg);
+    var lastFiveAvg = getFinalArrayPrep(categoriseIntoDegrees);
+    //console.log(lastFiveAvg);
+
+    
     return lastFiveAvg;
 
     
@@ -424,16 +419,16 @@ function toggleAcci(set){
     if(set == 'flat'){
         var other = document.getElementsByClassName('sharp')[0];
         other.classList.remove('sharp-clicked');
-        l(other);
+
     } else {
         var other = document.getElementsByClassName('flat')[0];
         other.classList.remove('flat-clicked');
-        l(other);
+
     }
     
     var element = document.getElementsByClassName(set)[0];
     var classSet = set + '-clicked';
-    l(element);
+
 
 
     element.classList.toggle(classSet);
@@ -447,7 +442,7 @@ function clearAllAcciStyle(){
     sharp.classList.remove('sharp-clicked');
     flat.classList.remove('flat-clicked');
 
-    console.log('entered clear all styles');
+    //console.log('entered clear all styles');
 
 }
 function filterStyles(key){

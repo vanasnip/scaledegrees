@@ -31,12 +31,14 @@ var idbApp = (function() {
       case 1:
         console.log('Creating the session object store');
         upgradeDb.createObjectStore('sessions', {keyPath: 'id'});
+        upgradeDb.createObjectStore('settings', {autoIncrement: false});
       case 2:
           // TODO 4.1 - create 'session' index
       var store = upgradeDb.transaction.objectStore('sessions');
+      var settings = upgradeDb.transaction.objectStore('settings');
       store.createIndex('session', 'session', {unique: false});
   
-  
+    
   
       // TODO 4.2 - create 'price' and 'description' indexes
   
@@ -71,7 +73,27 @@ var idbApp = (function() {
       });
   }
   
-  
+  function addSettings(obj) {
+    console.log('lalalala');
+    // TODO 3.3 - add objects to the products store
+    dbPromise.then(function(db) {
+        var tx = db.transaction('settings', 'readwrite');
+        var store = tx.objectStore('settings');
+        var item = {
+            degLab: obj.degLab,
+            quest: obj.quesNo
+        };
+   
+          console.log('Adding item: ', item);
+          store.add(item);
+ 
+        return tx.complete;
+      }).then(function() {
+        console.log('All items added successfully!');
+      }).catch(function(e) {
+        console.log('Error adding items: ', e);
+      });
+  }
  
 
   function getSessions() {

@@ -37,7 +37,7 @@
    var initDegreeArray = [{degree:'All', degKey: 0}];
    $scope.resultingDegrees = addAllKeyOptions(initDegreeArray, model.degrees);
    $scope.allDegrees = $scope.resultingDegrees[0];
-   $scope.changeDegree = function(){l($scope.allDegrees);}
+ 
    
    
    $scope.selectedAction = function(){
@@ -71,6 +71,7 @@
 
                case [key, 'All'].join(' '):
                     //console.log(key + ' ' + deg);
+   
                     chartLabels = getAllDegreeNames();
                     return getSelectedKeyAllDegreeChartData(data, key, deg, 1);
                     break;
@@ -211,7 +212,7 @@
 
         $scope.acci = [$scope.acciStat, mod];
         $scope.acciStat = false;
-        console.log($scope.acciStat);
+        //console.log($scope.acciStat);
       };
 
 
@@ -265,7 +266,7 @@
     
       function cleanTime(rawTime){
         elapsed = Math.floor(rawTime / 100) / 10;
-        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; };
+ 
         return elapsed;
       }
 
