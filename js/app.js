@@ -159,7 +159,7 @@
         if($scope.selectedKey != "?"){
           
           $scope.leStart = new Date().getTime();
-          $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.enquiries + "/" + $scope.romaOrAlpha);
+          $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.db_enquiries + "/" + $scope.db_romaOrAlpha);
           
           
         }
@@ -185,13 +185,12 @@
       $scope.selectKey = function(leKey){
         $scope.selectedKey = leKey.keyName;
         //idbApp.addSession();//******************************************************************************************** */
-       // console.log($scope.enquiries);
+    
           return $scope.selectedKey;
 
       }
 
       $scope.noQuestion = [20,10,50,100,2];
-
       $scope.enquiries = $scope.noQuestion[0];
       $scope.score = 0;
       $scope.correct = [true, 0];
@@ -203,6 +202,57 @@
       $scope.acci = [false, ""];
       $scope.settingStat = false;
       $scope.romaOrAlpha = true;
+      $scope.db_romaOrAlpha;
+      $scope.db_enquiries;
+      var setChange = false;
+      
+      $scope.changeSettings = function(){
+        setChange = true;
+        var settings = {
+          degreeLabel: $scope.romaOrAlpha,
+          noQues: $scope.enquiries
+        }
+        //idbApp.clearSettings();
+        idbApp.addSettings(settings);
+        settingsBridge();
+        console.log('settings changed');
+      }
+      
+      function settingsBridge(){
+        idbApp.getSettings().then(function(data){
+            checkSettings(data);
+        }).catch(function(error){
+          console.log(error);
+        });
+      }
+      settingsBridge();
+
+   
+       
+
+      function checkSettings(data){
+        var settings;
+        if(data.length == 0){
+            settings = {
+              degreeLabel: $scope.romaOrAlpha,
+              noQues: $scope.enquiries
+          }          
+          idbApp.addSettings(settings);
+          $scope.db_romaOrAlpha = settings.degreeLabel;
+        }else if(data.length > 0){
+          settings = data[data.length - 1];
+       
+        }
+        $scope.db_romaOrAlpha = settings.degreeLabel;
+        $scope.db_enquiries = settings.noQues;       
+      }
+
+      
+
+      console.log($scope.db_enquiries);
+      console.log($scope.db_romaOrAlpha);
+      
+      
 
       
 

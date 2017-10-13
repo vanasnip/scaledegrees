@@ -31,7 +31,7 @@ var idbApp = (function() {
       case 1:
         console.log('Creating the session object store');
         upgradeDb.createObjectStore('sessions', {keyPath: 'id'});
-        upgradeDb.createObjectStore('settings', {autoIncrement: false});
+        upgradeDb.createObjectStore('settings', {autoIncrement: true});
       case 2:
           // TODO 4.1 - create 'session' index
       var store = upgradeDb.transaction.objectStore('sessions');
@@ -50,7 +50,6 @@ var idbApp = (function() {
 
 
   function addSession(obj) {
-    console.log('lalalala');
     // TODO 3.3 - add objects to the products store
     dbPromise.then(function(db) {
         var tx = db.transaction('sessions', 'readwrite');
@@ -60,8 +59,7 @@ var idbApp = (function() {
             id: obj.id,
             key: obj.key,
             answers: obj.allResponses
-        };
-   
+        };   
           console.log('Adding item: ', item);
           store.add(item);
  
@@ -72,30 +70,8 @@ var idbApp = (function() {
         console.log('Error adding items: ', e);
       });
   }
-  
-  function addSettings(obj) {
-    console.log('lalalala');
-    // TODO 3.3 - add objects to the products store
-    dbPromise.then(function(db) {
-        var tx = db.transaction('settings', 'readwrite');
-        var store = tx.objectStore('settings');
-        var item = {
-            degLab: obj.degLab,
-            quest: obj.quesNo
-        };
-   
-          console.log('Adding item: ', item);
-          store.add(item);
- 
-        return tx.complete;
-      }).then(function() {
-        console.log('All items added successfully!');
-      }).catch(function(e) {
-        console.log('Error adding items: ', e);
-      });
-  }
- 
 
+  
   function getSessions() {
     return dbPromise.then(function(db){
       var tx = db.transaction('sessions');
@@ -111,11 +87,66 @@ var idbApp = (function() {
     })
     
   }
+  
+  function addSettings(obj) {
+    console.log('lalalala');
+    // TODO 3.3 - add objects to the products store
+    dbPromise.then(function(db) {
+        var tx = db.transaction('settings', 'readwrite');
+        var store = tx.objectStore('settings');
+        var item = {
+          degreeLabel: obj.degreeLabel,
+          noQues: obj.noQues,
+          got: true
+        };
+   
+          console.log('Adding item: ', item);
+          store.add(item);
+ 
+        return tx.complete;
+      }).then(function() {
+        console.log('All items added successfully!');
+      }).catch(function(e) {
+        console.log('Error adding items: ', e);
+      });
+  }
+
+  function getSettings() {
+    return dbPromise.then(function(db){
+      var tx = db.transaction('settings');
+      var settingsOS = tx.objectStore('settings');
+      return settingsOS;
+    }).then(function(sOS){
+      var getData = sOS.getAll();
+      return getData;      
+    }).then(function(data){  
+      return  data;
+    }).catch(function(e){
+      console.log('Error adding items: ', e);
+    })
+    
+  }
+
+  function clearSettings(){
+    dbPromise.then(function(db) {
+      var tx = db.transaction('settings', 'readwrite');
+      var setting = tx.objectsetting('settings');
+      store.delete(key);
+      return tx.complete;
+    }).then(function() {
+      console.log('Item deleted');
+    });
+  }
+ 
+
 
 
   return {
     dbPromise: (dbPromise),
     addSession: (addSession),
-    getSessions: (getSessions)
+    getSessions: (getSessions),
+    addSettings: (addSettings),
+    getSettings: (getSettings),
+    clearSettings: (clearSettings)
   };
 })();
