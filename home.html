@@ -7,13 +7,13 @@
 			<h2 class="col-xs-12">Settings</h2>
 
 			<form name="form">
-				<h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-change="changeSettings()" ng-value="true"> Roman Numeral: <span class="setting-dat roman">V</span></h3>
-				<h3><input class="radio-btn" type="radio" ng-model="romaOrAlpha" ng-change="changeSettings()" ng-value="false"> Alpha Numeric: <span class="setting-dat alpha">5</span></h3>
+				<h3><input class="radio-btn" type="radio" ng-model="db_romaOrAlpha" ng-change="changeSettings()" ng-value="true"> Roman Numeral: <span class="setting-dat roman">V</span></h3>
+				<h3><input class="radio-btn" type="radio" ng-model="db_romaOrAlpha" ng-change="changeSettings()" ng-value="false"> Alpha Numeric: <span class="setting-dat alpha">5</span></h3>
 			</form>
 			
 			<div class="reheight-select-key-title-2"></div>	
 				<h3 class="no-ques col-xs-12">number of questions</h3>
-				<select class="no-ques-sel col-xs-4" ng-model="enquiries" ng-change="changeSettings()" ng-options="num for num in noQuestion">			
+				<select class="no-ques-sel col-xs-4" ng-model="db_enquiries" ng-change="changeSettings()" ng-options="num for num in noQuestion">			
 				<option value="num"></option>
 				</select>
 			</div>

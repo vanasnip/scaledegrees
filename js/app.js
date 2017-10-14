@@ -191,7 +191,7 @@
       }
 
       $scope.noQuestion = [20,10,50,100,2];
-      $scope.enquiries = $scope.noQuestion[0];
+      
       $scope.score = 0;
       $scope.correct = [true, 0];
       $scope.incorrect = 0;
@@ -201,16 +201,27 @@
       $scope.acciStat = false;
       $scope.acci = [false, ""];
       $scope.settingStat = false;
-      $scope.romaOrAlpha = true;
+      //$scope.romaOrAlpha = true;
+      var enqPos ;
       $scope.db_romaOrAlpha;
-      $scope.db_enquiries;
-      var setChange = false;
+      $scope.db_enquiries =  $scope.noQuestion[0];
+ 
+      var chkEnq = function( comp1, comp2){     
+        for(var i = 0; i < comp2.length; i++){         
+          if(comp1 == comp2[i]){
+            return i;
+          } 
+        }
+        return 0;
+      }
+     
+
       
       $scope.changeSettings = function(){
-        setChange = true;
+       
         var settings = {
-          degreeLabel: $scope.romaOrAlpha,
-          noQues: $scope.enquiries
+          degreeLabel: $scope.db_romaOrAlpha,
+          plcInArr: chkEnq($scope.db_enquiries, $scope.noQuestion)
         }
         //idbApp.clearSettings();
         idbApp.addSettings(settings);
@@ -227,6 +238,7 @@
       }
       settingsBridge();
 
+      
    
        
 
@@ -234,17 +246,22 @@
         var settings;
         if(data.length == 0){
             settings = {
-              degreeLabel: $scope.romaOrAlpha,
-              noQues: $scope.enquiries
+              degreeLabel: true,
+              plcInArr: 0
           }          
           idbApp.addSettings(settings);
+          enqPos = settings.plcInArr;
+          $scope.db_enquiries = $scope.noQuestion[enqPos];
           $scope.db_romaOrAlpha = settings.degreeLabel;
         }else if(data.length > 0){
           settings = data[data.length - 1];
-       
         }
         $scope.db_romaOrAlpha = settings.degreeLabel;
-        $scope.db_enquiries = settings.noQues;       
+        enqPos = settings.plcInArr;  
+        $scope.db_enquiries =  $scope.noQuestion[enqPos]; 
+        
+        console.log('lalalalal');  
+        console.log(settings);  
       }
 
       
@@ -253,7 +270,7 @@
       console.log($scope.db_romaOrAlpha);
       
       
-
+  
       
 
 

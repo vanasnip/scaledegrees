@@ -96,7 +96,7 @@ var idbApp = (function() {
         var store = tx.objectStore('settings');
         var item = {
           degreeLabel: obj.degreeLabel,
-          noQues: obj.noQues,
+          plcInArr: obj.plcInArr,
           got: true
         };
    
