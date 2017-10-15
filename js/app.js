@@ -51,7 +51,7 @@
             
            drawCanvas(400,400);
            sessionChart = document.getElementById("chart-result");
-           var chartData = (function(){
+           var cDat = (function(){
              var key = $scope.allKeys.keyName;
              var deg = $scope.allDegrees.degree;
   
@@ -59,35 +59,60 @@
                case 'All All':
                     //console.log(key + ' ' + deg);
                     chartLabels = getAllKeyNames();
-                    return getAllSessAllDegChartData(data);
+                    var context = getAllSessAllDegChartData(data);
+                    return  {                    
+                      chartData: context,
+                      chartType: 'bar',
+                      visibility: true,
+                      chartLabels: chartLabels
+                    }
+                     
                     break;
 
                case ['All', deg].join(' '):
                     //console.log(key + ' ' + deg);
                     chartLabels = getAllKeyNames();
-                    return getAllSessSelectedDegreeChartData(data, key, deg, 0);
-                   
+                    var context =  getAllSessSelectedDegreeChartData(data, key, deg);
+                    return  {                    
+                      chartData: context,
+                      chartType: 'bar',
+                      visibility: true,
+                      chartLabels: chartLabels
+                    }
+                    
                     break;
 
                case [key, 'All'].join(' '):
                     //console.log(key + ' ' + deg);
    
                     chartLabels = getAllDegreeNames();
-                    return getSelectedKeyAllDegreeChartData(data, key, deg, 1);
+                    var context = getSelectedKeyAllDegreeChartData(data, key, deg);
+                    return  {                    
+                      chartData: context,
+                      chartType: 'bar',
+                      visibility: true,
+                      chartLabels: chartLabels
+                    }
+                    
                     break;
                     
               case [key, deg].join(' '):
-                    //console.log(key + ' ' + deg);
-                    chartLabels = getAllKeyNames();
-                    getSelectedKeyAllDegreeChartData(data, key, deg, 2);
-                    return getAllSessAllDegChartData(data);
+                    var context = getSelKeySelDegreeChartData(data, key, deg);
+                    chartLabels = context;
+                    return  {                    
+                      chartData: context,
+                      chartType: 'bar',
+                      visibility: false,
+                      chartLabels: context
+                    }
+                    
                     break;
 
                default:
                     return getlastSessionChartArray(data);
              }
            })();
-           var myFancyChart = populateChart(chartData, sessionChart, $scope.typeOfChart, true, chartLabels);
+           var myFancyChart = populateChart(cDat.chartData, sessionChart, cDat.chartType, cDat.visibility, cDat.chartLabels);
            myFancyChart.render();
      
           return data;
@@ -226,7 +251,7 @@
         //idbApp.clearSettings();
         idbApp.addSettings(settings);
         settingsBridge();
-        console.log('settings changed');
+        //console.log('settings changed');
       }
       
       function settingsBridge(){
@@ -260,14 +285,12 @@
         enqPos = settings.plcInArr;  
         $scope.db_enquiries =  $scope.noQuestion[enqPos]; 
         
-        console.log('lalalalal');  
-        console.log(settings);  
+        
+        //console.log(settings);  
       }
 
       
 
-      console.log($scope.db_enquiries);
-      console.log($scope.db_romaOrAlpha);
       
       
   
