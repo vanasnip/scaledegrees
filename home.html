@@ -12,6 +12,8 @@
 			</form>
 			
 			<div class="reheight-select-key-title-2"></div>	
+				<label class="col-xs-8" for="sound">sound</label>	
+				<input class="col-xs-4" ng-model="db_sound" ng-change="changeSettings()" type="checkbox" checked name="sound" ng-value="true">
 				<h3 class="no-ques col-xs-12">number of questions</h3>
 				<select class="no-ques-sel col-xs-4" ng-model="db_enquiries" ng-change="changeSettings()" ng-options="num for num in noQuestion">			
 				<option value="num"></option>

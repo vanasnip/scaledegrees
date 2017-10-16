@@ -8,7 +8,7 @@
         templateUrl: "home.html",
         controller: "myCtrl"
       })
-      .when("/keytest/:theKey/:leStart/:quess/:degStyle", {
+      .when("/keytest/:theKey/:leStart/:quess/:degStyle/:sound", {
         templateUrl: "keytest.html",
         controller: "myCtrl"
       })
@@ -173,6 +173,7 @@
       $scope.quess = $routeParams.quess;
       $scope.totalQuess = $routeParams.totalQuess;
       $scope.degStyle = $routeParams.degStyle;
+      $scope.sound = $routeParams.sound;
       $scope.myKeys = $scope.keys[0];
       $scope.selectedKey = "?";
       $scope.keyArray;
@@ -185,7 +186,7 @@
         if($scope.selectedKey != "?"){
           
           $scope.leStart = new Date().getTime();
-          $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.db_enquiries + "/" + $scope.db_romaOrAlpha);
+          $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.db_enquiries + "/" + $scope.db_romaOrAlpha + "/" + $scope.db_sound);
           
           
         }
@@ -231,10 +232,11 @@
       var enqPos ;
       $scope.db_romaOrAlpha;
       $scope.db_enquiries =  $scope.noQuestion[0];
+      $scope.db_sound;
       $scope.playSound = function(note){
         playSound(note);
       }
-
+     
       
  
       var chkEnq = function( comp1, comp2){     
@@ -252,7 +254,8 @@
        
         var settings = {
           degreeLabel: $scope.db_romaOrAlpha,
-          plcInArr: chkEnq($scope.db_enquiries, $scope.noQuestion)
+          plcInArr: chkEnq($scope.db_enquiries, $scope.noQuestion),
+          sound: $scope.db_sound
         }
         //idbApp.clearSettings();
         idbApp.addSettings(settings);
@@ -278,19 +281,21 @@
         if(data.length == 0){
             settings = {
               degreeLabel: true,
-              plcInArr: 0
+              plcInArr: 0,
+              sound: true
           }          
           idbApp.addSettings(settings);
           enqPos = settings.plcInArr;
           $scope.db_enquiries = $scope.noQuestion[enqPos];
           $scope.db_romaOrAlpha = settings.degreeLabel;
+          $scope.db_sound = settings.sound;
         }else if(data.length > 0){
           settings = data[data.length - 1];
         }
         $scope.db_romaOrAlpha = settings.degreeLabel;
         enqPos = settings.plcInArr;  
         $scope.db_enquiries =  $scope.noQuestion[enqPos]; 
-        
+        $scope.db_sound = settings.sound;
         
         //console.log(settings);  
       }
@@ -326,7 +331,7 @@
           if(key.toLowerCase() === $scope.keys[i].notes[0]){
             myKeyObj = [$scope.keys[i]];
             //console.log($scope.keys[i].notes)
-            //console.log(myKeyObj);
+           
             return $scope.questions(myKeyObj);
           }
         }
@@ -345,7 +350,9 @@
       } 
 
       var randomise = function(){
-        var randomDegree = $scope.degrees[randomNumber()];
+        var num = randomNumber();
+        var randomDegree = $scope.degrees[num];
+        // randomDegree.frq = $scope.freq[num];
         return randomDegree;
 
         //{degreeLab: II, ans: "d"}
@@ -367,6 +374,7 @@
       }
 
       var getQNAObj = function(obj){ 
+        //console.log(obj);
           var quessFunc = function(){
             
                 if($scope.degStyle === "true"){
@@ -378,12 +386,15 @@
                 }
                 
               };
-            var myDeg = randomise();        
+            var myDeg = randomise();    
+            //console.log(myDeg);    
             var QNAObj = {
               ques: quessFunc(),
               answ: obj[0].notes[myDeg.degKey],
-              loc: myDeg.degKey
+              loc: myDeg.degKey,
+              frq: obj[0].freq[myDeg.degKey]
             };
+            //console.log(QNAObj);
             return QNAObj;
           }
 
@@ -404,7 +415,11 @@
       $scope.questions = function(obj){   
           //console.log('got in');
           $scope.theQuests =  getQNAObj(obj);
-          //console.log($scope.theQuests);        
+          console.log($scope.db_sound);
+          if($scope.db_sound){
+            playSound($scope.theQuests.frq); 
+          }
+                 
           $scope.romanNumDeg = $scope.theQuests.ques;          
       }
 

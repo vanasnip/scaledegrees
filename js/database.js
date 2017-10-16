@@ -97,6 +97,7 @@ var idbApp = (function() {
         var item = {
           degreeLabel: obj.degreeLabel,
           plcInArr: obj.plcInArr,
+          sound: obj.sound,
           got: true
         };
    

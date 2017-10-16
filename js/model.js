@@ -72,7 +72,7 @@ var model = (function(){
       987.77
     ];//, key:'B'}];
     function getFrequencies(x){ 
-      return [frq[x+0], frq[x+2], frq[x+4], frq[x+5], frq[x+7], frq[x+9], frq[x+11]]
+      return [frq[x+0], frq[x+2], frq[x+4], frq[x+5], frq[x+7], frq[x+9], frq[x+11]];
     }
     var keys = [
       {
@@ -168,29 +168,6 @@ var model = (function(){
       }
       
     ];
-    var daSou = keys[13].freq;
-    console.log(daSou);
-    setTimeout(function(){
-      playSound(daSou[0]);
-      setTimeout(function(){
-        playSound(daSou[1]);
-        setTimeout(function(){
-          playSound(daSou[2]);
-          setTimeout(function(){
-            playSound(daSou[3]);
-            setTimeout(function(){
-              playSound(daSou[4]);
-              setTimeout(function(){
-                playSound(daSou[5]);
-                setTimeout(function(){
-                  playSound(daSou[6]);
-                }, 500);
-              }, 500);
-            }, 500);
-          }, 500);
-        }, 500);
-      }, 500);
-    }, 500);
 
     return {
         noteNames: noteNames,
