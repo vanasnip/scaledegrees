@@ -535,3 +535,4 @@ function playSound(note) {
     sound.play(value);
     sound.stop();
 }
+
