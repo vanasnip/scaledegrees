@@ -528,4 +528,10 @@ function conditionalStyling(array){
         // filter each results
         //apply class according to filter
 }
-
+let context = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(note) {
+    let sound = new Sound(context);
+    let value = note;
+    sound.play(value);
+    sound.stop();
+}

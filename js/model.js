@@ -40,6 +40,9 @@ var model = (function(){
       }
       
     ];
+    var frequency = {
+      
+    } ;
     var keys = [
       {
         keyName: "C",

@@ -151,6 +151,7 @@
   });
 
   app.controller('myCtrl', function($scope, $location, $routeParams, $timeout) {
+    
       $scope.conditionallyFormat = function(){
         getLaData().then(function(data){
           var theScore = getAllSessAllDegChartData(data);
@@ -230,6 +231,11 @@
       var enqPos ;
       $scope.db_romaOrAlpha;
       $scope.db_enquiries =  $scope.noQuestion[0];
+      $scope.playSound = function(note){
+        playSound(note);
+      }
+
+      
  
       var chkEnq = function( comp1, comp2){     
         for(var i = 0; i < comp2.length; i++){         
