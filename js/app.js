@@ -8,7 +8,7 @@
         templateUrl: "home.html",
         controller: "myCtrl"
       })
-      .when("/keytest/:theKey/:leStart/:quess/:degStyle/:sound", {
+      .when("/keytest/:theKey/:leStart/:quess/:degStyle/:sound/:soundOnly", {
         templateUrl: "keytest.html",
         controller: "myCtrl"
       })
@@ -174,6 +174,7 @@
       $scope.totalQuess = $routeParams.totalQuess;
       $scope.degStyle = $routeParams.degStyle;
       $scope.sound = $routeParams.sound;
+      $scope.soundOnly = $routeParams.soundOnly;
       $scope.myKeys = $scope.keys[0];
       $scope.selectedKey = "?";
       $scope.keyArray;
@@ -185,7 +186,7 @@
       $scope.keyTest = function(){
         if($scope.selectedKey != "?"){
           $scope.leStart = new Date().getTime();
-          $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.db_enquiries + "/" + $scope.db_romaOrAlpha + "/" + $scope.db_sound);
+          $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.db_enquiries + "/" + $scope.db_romaOrAlpha + "/" + $scope.db_sound + "/" + $scope.db_sound_only);
         }
       }
 
@@ -230,18 +231,21 @@
       $scope.db_romaOrAlpha;
       $scope.db_enquiries =  $scope.noQuestion[0];
       $scope.db_sound;
+      $scope.db_sound_only;
       $scope.pitch;
       $scope.soundOff = function(){
         console.log($scope.pitch)
         if($scope.pitch != undefined){
           if($scope.correct[1] < $scope.quess){
             playSound($scope.pitch);
-          }
-          
+          }          
         }
       }
       $scope.playSound = function(note){
         playSound(note);
+      }
+      $scope.setSoundOnly = function(){
+          hideDisplayDegree($scope.db_sound_only, $scope.db_sound);
       }
 
       
@@ -262,7 +266,8 @@
         var settings = {
           degreeLabel: $scope.db_romaOrAlpha,
           plcInArr: chkEnq($scope.db_enquiries, $scope.noQuestion),
-          sound: $scope.db_sound
+          sound: $scope.db_sound,
+          soundOnly: $scope.db_sound_only
         }
         //idbApp.clearSettings();
         idbApp.addSettings(settings);
@@ -289,13 +294,15 @@
             settings = {
               degreeLabel: true,
               plcInArr: 0,
-              sound: true
+              sound: true,
+              soundOnly: false
           }          
           idbApp.addSettings(settings);
           enqPos = settings.plcInArr;
           $scope.db_enquiries = $scope.noQuestion[enqPos];
           $scope.db_romaOrAlpha = settings.degreeLabel;
           $scope.db_sound = settings.sound;
+          $scope.db_sound_only = settings.soundOnly;
         }else if(data.length > 0){
           settings = data[data.length - 1];
         }
@@ -303,6 +310,7 @@
         enqPos = settings.plcInArr;  
         $scope.db_enquiries =  $scope.noQuestion[enqPos]; 
         $scope.db_sound = settings.sound;
+        $scope.db_sound_only = settings.soundOnly;
         
         //console.log(settings);  
       }

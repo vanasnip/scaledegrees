@@ -536,3 +536,14 @@ function playSound(note) {
     sound.stop();
 }
 
+function hideDisplayDegree(soundOnly, sound){
+    console.log(soundOnly + " " + sound);
+    if(soundOnly && sound){
+    
+    var other = document.getElementsByClassName('roman-deg')[0];
+        other.classList.add('blackout');
+    } else {
+        var other = document.getElementsByClassName('roman-deg')[0];
+        other.classList.remove('blackout');
+    }
+}

@@ -31,7 +31,7 @@ label, select {
 	display: inline-block;
 }
 
-div.home-div
+div.home-div,
 label,
 select,
 h3 {
@@ -55,7 +55,7 @@ h3 {
 	border-radius: 20px;
 }
 #sim-body.all-results,
-all-my-settings,
+.all-my-settings,
 .sett-no-ques,
 .contain-home-buttons,
 div.home-div.col-xs-12 {
@@ -298,6 +298,9 @@ h1.degree-ques {
 
 span.roman-deg {
 	color: #04b8bb;
+}
+span.roman-deg.blackout {
+	color: black;
 }
 
 div.limiter {
@@ -603,12 +606,21 @@ ul.star-box {
 @media (max-width: 992px) and (orientation:landscape) {
     div.select-key-label{
 		width: 20%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
+	
 	.reheight-answer-keys,
+	.reheight-select-key-title,
 	.reheight-key-test-title,
-	reheight-select-key-title-2,
+	.reheight-select-key-title-2,
 	.reheight-button-box-home{
 		display: none;
+	}
+	.col-xs-12.home-header{
+		width: 78%;
+		margin-top: 10px;
 	}
 	.button-box.home{
 		width: 80%;
@@ -639,7 +651,7 @@ ul.star-box {
 		width: 33.33%;
 		float: left;
 	}
-	all-my-settings {
+	.all-my-settings {
 		align-items: center;
 	}
 	#chart-div{
@@ -651,8 +663,26 @@ ul.star-box {
 	}
 	.all-result-opt{
 		width: 100%;
-		margin:150px 0;
+		margin:15px 0;
+	}
+	select.no-ques-sel{
+		width: 100%;
+	}
+	div.col-xs-12.home-div{
+		
+	}
+	.limiter.all-results{
+		padding: 0;
 	}
 
+	.limiter.session-results{
+		justify-content: flex-start;
+	}
+	.session-results #chart-div{
+		width: 50%;
+	}
+	.result-info{
+		width: 40%;
+	}
 
 }

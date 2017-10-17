@@ -14,7 +14,9 @@
 				<div class="reheight-select-key-title-2"></div>	
 					<div class="col-xs-12 sound-set-container">
 						<h3 class="col-xs-6 sound">sound</h3>	
-						<input class="col-xs-6" ng-model="db_sound" ng-change="changeSettings()" type="checkbox" checked name="sound" ng-value="true">	
+						<input class="col-xs-6" ng-model="db_sound" ng-change="changeSettings()" type="checkbox" checked name="sound" ng-value="true">
+						<h3 ng-hide="true" class="col-xs-6 sound">sound only</h3>	
+						<input ng-hide="true" class="col-xs-6" ng-model="db_sound_only" ng-change="changeSettings()" type="checkbox" unchecked name="soundonly" ng-value="false">	
 		
 					</div>
 					<div class="sett-no-ques">

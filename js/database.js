@@ -98,6 +98,7 @@ var idbApp = (function() {
           degreeLabel: obj.degreeLabel,
           plcInArr: obj.plcInArr,
           sound: obj.sound,
+          soundOnly: obj.soundOnly,
           got: true
         };
    
