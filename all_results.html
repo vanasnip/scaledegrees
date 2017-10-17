@@ -1,9 +1,9 @@
 
 
-<div id="sim-body" ng-controller="allResultsCtrl" ng-init="selectedAction()">
-    <div class="all-results">
+<div id="sim-body" class="all-results" ng-controller="allResultsCtrl" ng-init="selectedAction()">
+    <div class="all-res-opts">
         <button class="back-btn" ng-click="goHome()">←</button>
-        <div class="limiter">	
+        <div class="limiter all-results">	
             <div class="reheight-select-key-title-2"></div>	
               
             <div class="col-xs-5 all-result-opt col-sm-offset-1" id="key-sel">   
@@ -19,6 +19,7 @@
                     </select>
                 </div>
         </div>
+        </div>
         <div id="chart-div" class="col-xs-12 col-sm-8 col-md-6 col-lg-4"></div>               
-    </div>
+    
 </div>
