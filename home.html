@@ -12,8 +12,11 @@
 			</form>
 			
 			<div class="reheight-select-key-title-2"></div>	
-				<label class="col-xs-8" for="sound">sound</label>	
-				<input class="col-xs-4" ng-model="db_sound" ng-change="changeSettings()" type="checkbox" checked name="sound" ng-value="true">
+				<div class="col-xs-12 sound-set-container">
+					<h3 class="col-xs-6 sound">sound</h3>	
+					<input class="col-xs-6" ng-model="db_sound" ng-change="changeSettings()" type="checkbox" checked name="sound" ng-value="true">	
+	
+				</div>
 				<h3 class="no-ques col-xs-12">number of questions</h3>
 				<select class="no-ques-sel col-xs-4" ng-model="db_enquiries" ng-change="changeSettings()" ng-options="num for num in noQuestion">			
 				<option value="num"></option>
@@ -39,9 +42,6 @@
 				<ul class="col-xs-12 button-box home">
 					<li class="col-xs-3 select-key" ng-model="myKeys" ng-repeat="key in keys">
 						<button class="col-xs-12 select-key-btn" ng-class="key.keyName" ng-click="global.myAction = true; selectKey(key)">{{key.keyName}}</button>
-					</li>
-					<li class="col-xs-3">
-						<button class="col-xs-12 select-key-btn" ng-click="playSound(523.25)">♫</button>
 					</li>
 				</ul>	
 				

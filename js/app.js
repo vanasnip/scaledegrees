@@ -184,11 +184,8 @@
       mySession.allResponses = [];
       $scope.keyTest = function(){
         if($scope.selectedKey != "?"){
-          
           $scope.leStart = new Date().getTime();
           $location.path("/keytest/" + $scope.selectedKey +  "/" + $scope.leStart + "/" + $scope.db_enquiries + "/" + $scope.db_romaOrAlpha + "/" + $scope.db_sound);
-          
-          
         }
       }
 
@@ -233,10 +230,20 @@
       $scope.db_romaOrAlpha;
       $scope.db_enquiries =  $scope.noQuestion[0];
       $scope.db_sound;
+      $scope.pitch;
+      $scope.soundOff = function(){
+        console.log($scope.pitch)
+        if($scope.pitch != undefined){
+          if($scope.correct[1] < $scope.quess){
+            playSound($scope.pitch);
+          }
+          
+        }
+      }
       $scope.playSound = function(note){
         playSound(note);
       }
-     
+
       
  
       var chkEnq = function( comp1, comp2){     
@@ -329,10 +336,13 @@
         for (var i = 0; i < $scope.keys.length; i++) {
           
           if(key.toLowerCase() === $scope.keys[i].notes[0]){
-            myKeyObj = [$scope.keys[i]];
-            //console.log($scope.keys[i].notes)
+            myKeyObj = [$scope.keys[i]];      
            
-            return $scope.questions(myKeyObj);
+            var lop = $scope.questions(myKeyObj);
+            if($scope.db_sound){
+              return lop.frq;
+            }
+
           }
         }
         
@@ -414,13 +424,14 @@
 
       $scope.questions = function(obj){   
           //console.log('got in');
-          $scope.theQuests =  getQNAObj(obj);
-          console.log($scope.db_sound);
+          $scope.theQuests =  getQNAObj(obj);             
+          $scope.romanNumDeg = $scope.theQuests.ques;
           if($scope.db_sound){
-            playSound($scope.theQuests.frq); 
+            $scope.pitch = $scope.theQuests.frq;
+            $scope.soundOff();
           }
-                 
-          $scope.romanNumDeg = $scope.theQuests.ques;          
+          
+          return $scope.theQuests;                                
       }
 
       $scope.toggleAcci = function(x){
@@ -455,21 +466,22 @@
           $scope.gotItRight = true;
           $scope.correct[0] = true;
           $scope.answer = "correct";
-          $scope.quality = "correct"
-        
-          $timeout(function(){
-            $scope.quality = "normal";
-            $scope.searchKey($scope.theKey);
-            //console.log($scope.correct[1] == $scope.quess);
-            if($scope.correct[1] == $scope.quess){
-              mySession.session = $scope.leStart;
-              mySession.key = $scope.theKey;
-              mySession.id = getNewTime();
-              //console.log(mySession);
-              
-              $scope.myResults($scope.score, mySession);
-            }
-          }, 250);
+          $scope.quality = "correct";
+
+          if($scope.correct[1] == $scope.quess){
+            mySession.session = $scope.leStart;
+            mySession.key = $scope.theKey;
+            mySession.id = getNewTime();
+            //console.log(mySession);            
+            $scope.myResults($scope.score, mySession);
+          } else {
+            $timeout(function(){
+              $scope.quality = "normal";
+              $scope.searchKey($scope.theKey);
+              //console.log($scope.correct[1]);            
+            }, 250);
+          }
+          
           
         } else if(note != $scope.theQuests.answ){
           $scope.gotItRight = false;

@@ -44,11 +44,16 @@ h3 {
 	display: flex;
     align-items: center;
 }
+.sound-set-container input,
 
 .question-settings form input {
 	margin: 4px 10px 0 0;
 	width: 40px;
 	height: 40px;
+}
+
+.sound-set-container input {
+	border-radius: 20px;
 }
 
 div.home-div.col-xs-12 {
@@ -60,6 +65,10 @@ div.home-div.col-xs-12 {
 	margin-bottom: 12px;
 }
 
+h3.sound{
+	font-size: 17px;
+	text-align: right;
+}
 h3.no-ques {
 	text-align: center;
 	font-size: 17px;
@@ -67,13 +76,17 @@ h3.no-ques {
 
 div.all-result-opt select,
 select.no-ques-sel {
-	border: #B3B6B7 1px solid;
+	border: #B3B6B7 2px solid;
 	background-color: black;
 	text-align: center;
 	margin: auto;
 	text-align-last:center;
 	height: 45px;
 	font-size: 25px;
+}
+
+select.no-ques-sel {
+	border-radius: 10px;
 }
 
 div.all-result-opt h3{
@@ -288,7 +301,7 @@ div.limiter {
 	max-width: 800px;
 	margin: auto;
 }
-
+div.sound-set-container,
 div.question-main {
 	display: flex;
 	flex-wrap: wrap;
@@ -299,7 +312,7 @@ div.question-settings {
 }
 .question-settings form {
 	margin: auto;
-    border: 1px solid white;
+    border: 2px solid white;
     padding: 12px;
     border-radius: 10px;
 }
@@ -308,7 +321,9 @@ div#sim-body {
 	height: calc(100vh - 40px);
 	width: calc(100% - 40px);
 }
-
+div.sound-set-container{
+	align-items: center;
+}
 div#sim-body.correct {
 	box-shadow: 0 0 0 0 rgba(4, 184, 187, 0.8);
   cursor: pointer;
@@ -575,4 +590,14 @@ ul.star-box {
 	margin-top: 10px;
 }
 
-
+@media (max-width: 992px) and (orientation:landscape) {
+    div.select-key-label{
+		width: 20%;
+	}
+	.reheight-button-box-home{
+		display: none;
+	}
+	.button-box.home{
+		width: 80%;
+	}
+}
