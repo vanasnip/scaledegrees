@@ -327,8 +327,7 @@
         $scope.acciStat = !$scope.acciStat;
 
         $scope.acci = [$scope.acciStat, mod];
-        $scope.acciStat = false;
-        //console.log($scope.acciStat);
+ 
       };
 
 

@@ -442,7 +442,7 @@ function addAllKeyOptions(array, dataSrc){
 }
 
 function toggleAcci(set){
-
+    console.log(set);
     if(set == 'flat'){
         var other = document.getElementsByClassName('sharp')[0];
         other.classList.remove('sharp-clicked');
